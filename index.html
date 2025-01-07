@@ -6,89 +6,85 @@
     <title>vtasca.dev</title>
     <style>
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
             line-height: 1.6;
             max-width: 800px;
             margin: 0 auto;
             padding: 2rem;
-            background-color: #f8f9fa;
-            color: #333;
+            background-color: #fdfbf7;
+            color: #2c2c2c;
         }
 
         .header {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
+            font-family: Georgia, serif;
         }
 
         h1 {
             font-size: 2.5rem;
-            color: #2d3748;
-            margin-bottom: 1rem;
+            color: #2c2c2c;
+            margin-bottom: 2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
         }
 
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
-            margin-bottom: 3rem;
+            gap: 2rem;
         }
 
         .social-links a {
             text-decoration: none;
-            color: #4a5568;
-            padding: 0.5rem 1rem;
-            border: 2px solid #4a5568;
-            border-radius: 5px;
-            transition: all 0.3s ease;
+            color: #666;
+            transition: color 0.3s ease;
+            font-size: 1.5rem;
         }
 
         .social-links a:hover {
-            background-color: #4a5568;
-            color: white;
+            color: #2c2c2c;
         }
 
-        .artwork {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        .artwork-container {
+            margin-bottom: 1.5rem;
         }
 
-        .artwork img {
-            max-width: 100%;
+        .artwork-container img {
+            width: 100%;
             height: auto;
-            margin-bottom: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
         }
 
-        .artwork-info {
-            border-top: 1px solid #e2e8f0;
-            padding-top: 1rem;
+        .artwork-caption {
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
             margin-top: 1rem;
+            font-style: italic;
         }
 
-        .artwork-info p {
-            margin: 0.5rem 0;
-            color: #4a5568;
-        }
+        /* Simple icons using HTML entities */
+        .github::before { content: "⌘"; }
+        .linkedin::before { content: "◆"; }
+        .kaggle::before { content: "○"; }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>vtasca.dev</h1>
         <div class="social-links">
-            <a href="https://github.com/vtasca">GitHub</a>
-            <a href="https://linkedin.com/in/vlad-tasca">LinkedIn</a>
-            <a href="https://kaggle.com/vtasca">Kaggle</a>
+            <a href="https://github.com/vtasca" class="github" title="GitHub"></a>
+            <a href="https://linkedin.com/in/vlad-tasca" class="linkedin" title="LinkedIn"></a>
+            <a href="https://kaggle.com/vtasca" class="kaggle" title="Kaggle"></a>
         </div>
     </div>
 
-    <div class="artwork">
-        <img src="/api/placeholder/800/500" alt="Featured Artwork">
-        <div class="artwork-info">
-            <p><strong>Title:</strong> The Starry Night</p>
-            <p><strong>Artist:</strong> Vincent van Gogh</p>
-            <p><strong>Date:</strong> June 1889</p>
-            <p><strong>Description:</strong> This is where you can add a description of the artwork that inspired you. Share your thoughts about why you chose this piece and what it means to you.</p>
+    <div class="artwork-container">
+        <img src="/api/placeholder/800/500" alt="The Starry Night">
+        <div class="artwork-caption">
+            The Starry Night - Vincent van Gogh, June 1889
         </div>
     </div>
 </body>
