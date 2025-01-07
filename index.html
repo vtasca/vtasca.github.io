@@ -3,89 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💫</text></svg>">
     <title>vtasca.dev</title>
-    <style>
-        body {
-            font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
-            line-height: 1.6;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem;
-            background-color: #fdfbf7;
-            color: #2c2c2c;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 4rem;
-            font-family: Georgia, serif;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            color: #2c2c2c;
-            margin-bottom: 2rem;
-            font-weight: normal;
-            letter-spacing: 0.5px;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-        }
-
-        .social-links a {
-            text-decoration: none;
-            color: #666;
-            transition: color 0.3s ease;
-            font-size: 1.5rem;
-        }
-
-        .social-links a:hover {
-            color: #2c2c2c;
-        }
-
-        .artwork-container {
-            margin-bottom: 1.5rem;
-        }
-
-        .artwork-container img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .artwork-caption {
-            text-align: center;
-            color: #666;
-            font-size: 0.9rem;
-            margin-top: 1rem;
-            font-style: italic;
-        }
-
-        /* Simple icons using HTML entities */
-        .github::before { content: "⌘"; }
-        .linkedin::before { content: "◆"; }
-        .kaggle::before { content: "○"; }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
     <div class="header">
         <h1>vtasca.dev</h1>
-        <div class="social-links">
-            <a href="https://github.com/vtasca" class="github" title="GitHub"></a>
-            <a href="https://linkedin.com/in/vlad-tasca" class="linkedin" title="LinkedIn"></a>
-            <a href="https://kaggle.com/vtasca" class="kaggle" title="Kaggle"></a>
-        </div>
+        
     </div>
 
     <div class="artwork-container">
-        <img src="/api/placeholder/800/500" alt="The Starry Night">
+        <img src="jardin-a-bordighera.jpg" alt="Jardin à Bordighera">
         <div class="artwork-caption">
-            The Starry Night - Vincent van Gogh, June 1889
+            Jardin à Bordighera - Claude Monet, 1885
         </div>
     </div>
+
+    <div class="social-links">
+        <a href="https://github.com/vtasca" class="github" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/vlad-tasca" class="linkedin" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://www.kaggle.com/vladtasca" class="kaggle" title="Kaggle"><i class="fab fa-kaggle"></i></a>
+    </div>
+
 </body>
 </html>
