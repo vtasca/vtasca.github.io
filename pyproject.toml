@@ -5,6 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "latex2mathml>=3.77.0",
     "markdown2>=2.5.3",
     "notion-client>=2.3.0",
     "notion2md>=2.9.0",
