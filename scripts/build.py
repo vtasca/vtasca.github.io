@@ -15,8 +15,8 @@ def get_html_template():
     <title>{title} | vtasca.dev</title>
     <meta name="description" content="{description}">
     <link rel="stylesheet" href="../static/styles.css">
+    <link rel="icon" type="image/svg+xml" href="../static/favicon.svg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-    
     <link rel="stylesheet" href="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script src="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.js"></script>
@@ -131,7 +131,7 @@ def generate_blog_index(blog_posts, publish_dir, src_dir):
     for post in sorted(blog_posts, key=lambda x: x.get('date', ''), reverse=True):
         post_html = f"""
         <div class="blog-post">
-            <h2><a href="{post['url']}.html">{post['name']}</a></h2>
+            <h2><a href="{post['url']}">{post['name']}</a></h2>
             <div class="post-meta">
                 <span class="date">{post.get('last_edited_time', '')[:10]}</span>
             </div>

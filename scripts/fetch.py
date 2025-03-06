@@ -123,7 +123,7 @@ def export_markdown(block_id, output_dir='src'):
             content = f.read()
             # Update image paths to use ../img/
             content = re.sub(r'!\[([^\]]*)\]\(([^)]+)\)', 
-                           lambda m: f'![{m.group(1)}](../img/{Path(m.group(2)).name})', 
+                           lambda m: f'![{m.group(1)}](img/{Path(m.group(2)).name})', 
                            content)
 
         # Move the markdown file to md directory with updated content
