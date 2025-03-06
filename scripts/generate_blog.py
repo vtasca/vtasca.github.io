@@ -18,6 +18,33 @@ load_dotenv()
 NOTION_TOKEN = os.environ["NOTION_TOKEN"]
 DATABASE_ID = os.environ["NOTION_DATABASE_ID"]
 
+def setup_publish_directory():
+    """Create and clean the publish directory structure"""
+    publish_dir = Path("published")
+    
+    # Remove existing publish directory if it exists
+    if publish_dir.exists():
+        shutil.rmtree(publish_dir)
+    
+    # Create fresh directory structure
+    publish_dir.mkdir()
+    (publish_dir / "blog").mkdir(exist_ok=True)
+    (publish_dir / "img").mkdir(exist_ok=True)
+
+    # Copy static directory
+    if Path("static").exists():
+        shutil.copytree("static", publish_dir / "static")
+
+    # Copy index.html
+    if Path("index.html").exists():
+        shutil.copy2("index.html", publish_dir)
+
+    return publish_dir
+
+def clean_root_directory():
+    shutil.rmtree("md")
+    shutil.rmtree("blog")
+
 
 def get_database_entries(database_id):
     """
@@ -102,9 +129,8 @@ def extract_blog_metadata(posts, filename="blog_metadata.json"):
 # --- Create markdown files
 
 
-def export_markdown(block_id):
-    # Create directories if they don't exist
-    Path("img").mkdir(exist_ok=True)
+def export_markdown(block_id, publish_dir):
+    # Create temporary directories if they don't exist
     Path("md").mkdir(exist_ok=True)
 
     MarkdownExporter(
@@ -140,11 +166,11 @@ def export_markdown(block_id):
         with open(md_destination, 'w', encoding='utf-8') as f:
             f.write(content)
 
-        # Move all images to img directory
+        # Move all images to published/img directory
         for img_path in image_files:
-            shutil.move(str(img_path), Path("img") / img_path.name)
+            shutil.move(str(img_path), publish_dir / "img" / img_path.name)
 
-        # Clean up: remove the container folder and temp directory
+        # Clean up
         shutil.rmtree("markdown_zip_container")
         shutil.rmtree("temp_extract")
 
@@ -168,7 +194,7 @@ def get_html_template():
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{title} | vtasca.dev</title>
     <meta name="description" content="{description}">
-    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../static/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
     
     <link rel="stylesheet" href="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.css">
@@ -182,7 +208,7 @@ def get_html_template():
 <body>
     <header>
         <nav>
-            <a href="../index.html">Home</a>
+            <a href="../">Home</a>
         </nav>
     </header>
 
@@ -196,13 +222,13 @@ def get_html_template():
         <!-- Add your footer content -->
     </footer>
 
-    <script src="../core.js"></script>
+    <script src="../static/core.js"></script>
 </body>
 </html>
 """
 
 
-def convert_markdown_to_html(markdown_file_path, metadata=None):
+def convert_markdown_to_html(markdown_file_path, metadata=None, output_dir=Path("static/blog")):
     """
     Convert a markdown file to HTML using markdown2 and save it with proper HTML structure.
 
@@ -210,7 +236,7 @@ def convert_markdown_to_html(markdown_file_path, metadata=None):
         markdown_file_path (str): Path to the markdown file
         metadata (dict, optional): Post metadata including title, description, etc.
     """
-    Path("html").mkdir(exist_ok=True)
+    Path("blog").mkdir(exist_ok=True)
     markdowner = Markdown(extras=["fenced-code-blocks", "latex"])
 
     # Read markdown and convert to HTML
@@ -237,7 +263,7 @@ def convert_markdown_to_html(markdown_file_path, metadata=None):
     else:
         html_filename = Path(markdown_file_path).name.replace(".md", ".html")
 
-    html_path = Path("html") / html_filename
+    html_path = output_dir / html_filename
     with open(html_path, "w") as f:
         f.write(final_html)
 
@@ -245,16 +271,19 @@ def convert_markdown_to_html(markdown_file_path, metadata=None):
 
 
 if __name__ == "__main__":
-    # Get all blog posts
-    database_id = DATABASE_ID
-    all_blog_posts = get_database_entries(database_id)
+    publish_dir = setup_publish_directory()
 
-    extract_blog_metadata(all_blog_posts)
+    # Get all blog posts
+    all_blog_posts = get_database_entries(DATABASE_ID)
+
+    extract_blog_metadata(all_blog_posts, filename=publish_dir / "blog_metadata.json")
 
     # Load blog metadata from JSON file
-    with open("blog_metadata.json", "r") as f:
+    with open(publish_dir / "blog_metadata.json", "r") as f:
         blog_posts = json.load(f)
 
     for post in blog_posts:
-        export_markdown(post["id"])
-        convert_markdown_to_html(f"md/{post['id']}.md", metadata=post)
+        export_markdown(post["id"], publish_dir)
+        convert_markdown_to_html(f"md/{post['id']}.md", metadata=post, output_dir=publish_dir / "blog")
+
+    clean_root_directory()
