@@ -10,4 +10,5 @@ dependencies = [
     "notion-client>=2.3.0",
     "notion2md>=2.9.0",
     "python-dotenv>=1.0.1",
+    "watchdog>=6.0.0",
 ]
