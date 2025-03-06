@@ -9,7 +9,6 @@ body {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
 }
 
 .header {
@@ -24,6 +23,16 @@ h1 {
     margin-bottom: 0.5rem;
     font-weight: normal;
     letter-spacing: 0.5px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+code {
+    border-radius: 10px;
 }
 
 .social-links {
