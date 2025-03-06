@@ -21,6 +21,7 @@ DATABASE_ID = os.environ["NOTION_DATABASE_ID"]
 def setup_publish_directory():
     """Create and clean the publish directory structure"""
     publish_dir = Path("published")
+    src_dir = Path("src")
     
     # Remove existing publish directory if it exists
     if publish_dir.exists():
@@ -28,17 +29,17 @@ def setup_publish_directory():
     
     # Create fresh directory structure
     publish_dir.mkdir()
-    (publish_dir / "blog").mkdir(exist_ok=True)
-    (publish_dir / "img").mkdir(exist_ok=True)
-
-    # Copy static directory
-    if Path("static").exists():
-        shutil.copytree("static", publish_dir / "static")
-
-    # Copy index.html
-    if Path("index.html").exists():
-        shutil.copy2("index.html", publish_dir)
-
+    (publish_dir / "blog").mkdir()
+    (publish_dir / "img").mkdir()
+    
+    # Copy static directory from src
+    if (src_dir / "static").exists():
+        shutil.copytree(src_dir / "static", publish_dir / "static")
+    
+    # Copy index.html from src
+    if (src_dir / "index.html").exists():
+        shutil.copy2(src_dir / "index.html", publish_dir)
+    
     return publish_dir
 
 def clean_root_directory():

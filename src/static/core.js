@@ -1,10 +1,10 @@
 function setupFaviconSwitch() {
   const switchToInactive = function () {
-    changeFavicon("../inactive-favicon.svg", "image/svg+xml");
+    changeFavicon("static/inactive-favicon.svg", "image/svg+xml");
   };
 
   const switchToActive = function () {
-    changeFavicon("../favicon.svg", "image/svg+xml");
+    changeFavicon("static/favicon.svg", "image/svg+xml");
   };
 
   function changeFavicon(iconPath, iconType) {
