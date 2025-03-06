@@ -114,6 +114,10 @@ def copy_files(publish_dir, src_dir):
     if (src_dir / "index.html").exists():
         shutil.copy2(src_dir / "index.html", publish_dir)
 
+    # Copy blog.html from src
+    if (src_dir / "blog.html").exists():
+        shutil.copy2(src_dir / "blog.html", publish_dir)
+
     # Copy blog images
     if (src_dir / "blog/img").exists():
         shutil.copytree(src_dir / "blog/img", publish_dir / "blog/img")
