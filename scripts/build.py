@@ -114,24 +114,61 @@ def copy_files(publish_dir, src_dir):
     if (src_dir / "index.html").exists():
         shutil.copy2(src_dir / "index.html", publish_dir)
 
-    # Copy blog.html from src
-    if (src_dir / "blog.html").exists():
-        shutil.copy2(src_dir / "blog.html", publish_dir)
-
     # Copy blog images
     if (src_dir / "blog/img").exists():
         shutil.copytree(src_dir / "blog/img", publish_dir / "blog/img")
 
 
+def generate_blog_index(blog_posts, publish_dir, src_dir):
+    """Generate the blog index page listing all posts"""
+    # Read the blog index template
+    with open(src_dir / "blog/index.html", "r") as f:
+        template = f.read()
+
+    # Generate HTML for blog post list
+    posts_html = []
+    for post in sorted(blog_posts, key=lambda x: x.get('date', ''), reverse=True):
+        post_html = f"""
+        <div class="blog-post">
+            <h2><a href="{post['url']}.html">{post['name']}</a></h2>
+            <div class="post-meta">
+                <span class="date">{post.get('last_edited_time', '')[:10]}</span>
+            </div>
+            <p class="description">{post.get('description', '')}</p>
+        </div>
+        """
+        posts_html.append(post_html)
+
+    # Insert the posts list into the template
+    # Find the closing </div> of the header and insert posts after it
+    header_end = template.find('</div>') + 6
+    final_html = (
+        template[:header_end] + 
+        '\n    <div class="blog-posts">\n' +
+        ''.join(posts_html) +
+        '\n    </div>\n' +
+        template[header_end:]
+    )
+
+    # Write the generated index page
+    with open(publish_dir / "blog/index.html", "w") as f:
+        f.write(final_html)
+
 
 if __name__ == "__main__":
     
+    # Set up directories
     publish_dir, src_dir = set_up_directories()
 
+    # Copy static files
     copy_files(publish_dir, src_dir)
 
+    # Generate blog posts
     with open(src_dir / "blog_metadata.json", "r") as f:
         blog_posts = json.load(f)
 
     for post in blog_posts:
         convert_markdown_to_html(Path("src/blog/md") / (post['id'] + ".md"), metadata=post, output_dir=publish_dir / "blog")
+
+    # Generate other pages
+    generate_blog_index(blog_posts, publish_dir, src_dir)
