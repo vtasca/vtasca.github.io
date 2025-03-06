@@ -29,11 +29,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install .
 
-      - name: Generate blog content
+      - name: Fetch content
         env:
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
           NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
-        run: python scripts/generate_blog.py
+        run: python scripts/fetch.py
+
+      - name: Build site
+        run: python scripts/build.py
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
