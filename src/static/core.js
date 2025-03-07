@@ -1,10 +1,19 @@
 function setupFaviconSwitch() {
+  // Get the base path for static assets
+  const getStaticPath = () => {
+    // Check if we're in a subdirectory by looking at pathname
+    const isSubdirectory = window.location.pathname.split('/').length > 2;
+    return isSubdirectory ? '../static' : 'static';
+  };
+
+  const staticPath = getStaticPath();
+
   const switchToInactive = function () {
-    changeFavicon("static/inactive-favicon.svg", "image/svg+xml");
+    changeFavicon(`${staticPath}/inactive-favicon.svg`, "image/svg+xml");
   };
 
   const switchToActive = function () {
-    changeFavicon("static/favicon.svg", "image/svg+xml");
+    changeFavicon(`${staticPath}/favicon.svg`, "image/svg+xml");
   };
 
   function changeFavicon(iconPath, iconType) {
