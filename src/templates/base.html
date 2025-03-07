@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}} | vtasca.dev</title>
+    <meta name="description" content="{{description}}">
+    <link rel="stylesheet" href="{{static_prefix}}/styles.css">
+    <link rel="icon" type="image/svg+xml" href="{{static_prefix}}/favicon.svg">
+    {% block head %}
+    {% endblock %}
+</head>
+
+<body>
+    <header>
+        <nav>
+            <a href="{{root_prefix}}/">Home</a>
+            <a href="{{root_prefix}}/blog">Blog</a>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <!-- Add your footer content -->
+    </footer>
+
+    <script src="{{static_prefix}}/core.js"></script>
+    {% block scripts %}
+    {% endblock %}
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="header">
+    <h1>Blog</h1>
+</div>
+
+<div class="blog-posts">
+    {% for post in posts %}
+    <div class="blog-post">
+        <h2><a href="{{ post.url }}">{{ post.name }}</a></h2>
+        <div class="post-meta">
+            <span class="date">{{ post.last_edited_time[:10] }}</span>
+        </div>
+        <p class="description">{{ post.description }}</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
