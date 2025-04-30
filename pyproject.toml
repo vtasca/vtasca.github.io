@@ -1,7 +1,7 @@
 [project]
 name = "vtasca-github-io"
 version = "0.1.0"
-description = "Add your description here"
+description = "Small website powered by GitHub Pages, Actions and some Python glue."
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
