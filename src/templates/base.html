@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">      
-    <title>{{title}} | vtasca.dev</title>
+    <title>{% if is_homepage %}{{title}}{% else %}{{title}} | vtasca.dev{% endif %}</title>
     <meta name="description" content="{{description}}">
     <link rel="stylesheet" href="{{static_prefix}}/styles.css?v={{cache_bust}}">
     <link rel="icon" type="image/svg+xml" href="{{static_prefix}}/favicon.svg">

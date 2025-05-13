@@ -18,6 +18,9 @@ def setup_jinja():
     # Random number for cache busting
     env.globals['cache_bust'] = str(random.randint(0, 1000000))
     
+    # Add is_homepage flag
+    env.globals['is_homepage'] = False
+    
     return env
 
 def convert_markdown_to_html(markdown_file_path, metadata=None, output_dir=Path("blog")):
@@ -110,6 +113,9 @@ def generate_home(publish_dir):
     """Generate the homepage"""
     env = setup_jinja()
     template = env.get_template('home.html')
+    
+    # Set is_homepage to True for the homepage
+    env.globals['is_homepage'] = True
     
     html = template.render(
         title="vtasca.dev",
