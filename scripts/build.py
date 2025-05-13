@@ -3,13 +3,21 @@ import shutil
 import json
 from markdown2 import Markdown
 from jinja2 import Environment, FileSystemLoader
+import datetime
 
 def setup_jinja():
     """Set up Jinja environment"""
-    return Environment(
+    env = Environment(
         loader=FileSystemLoader('src/templates'),
         autoescape=True
     )
+    
+    # Add current year to all templates
+    env.globals['now'] = type('', (), {'year': datetime.datetime.now().year})()
+
+    # 
+    
+    return env
 
 def convert_markdown_to_html(markdown_file_path, metadata=None, output_dir=Path("blog")):
     """
