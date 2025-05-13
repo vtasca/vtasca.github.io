@@ -1,5 +1,33 @@
+/* Reset */
+:root {
+    box-sizing: border-box;
+    line-height: 1.4;
+    /* https://kilianvalkhof.com/2022/css-html/your-css-reset-needs-text-size-adjust-probably/ */
+    -moz-text-size-adjust: none;
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+body, h1, h2, h3, h4, h5, h6, p {
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+}
+
+img {
+    max-width:100%;
+    height:auto;
+}
+
+/* Styles */
+
 body {
-    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-family: Charter, 'Bitstream Charter', 'Sitka Text', Cambria, serif;
+    font-weight: normal;
     line-height: 1.4;
     max-width: 800px;
     margin: 0 auto;
@@ -14,7 +42,6 @@ body {
 .header {
     text-align: center;
     margin-bottom: 1rem;
-    font-family: Georgia, serif;
 }
 
 h1 {
@@ -93,7 +120,6 @@ code {
 }
 
 .brand-link {
-    font-family: Georgia, serif;
     font-size: 1.5rem;
     text-decoration: none;
     color: #2c2c2c;
