@@ -3,10 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">      
     <title>{{title}} | vtasca.dev</title>
     <meta name="description" content="{{description}}">
-    <link rel="stylesheet" href="{{static_prefix}}/styles.css?v">
+    <link rel="stylesheet" href="{{static_prefix}}/styles.css?v={{cache_bust}}">
     <link rel="icon" type="image/svg+xml" href="{{static_prefix}}/favicon.svg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     {% block head %}
@@ -57,8 +57,7 @@
             </div>
         </div>
     </footer>
-
-    <script src="{{static_prefix}}/core.js"></script>
+    <script src="{{static_prefix}}/core.js?v={{cache_bust}}"></script>
     {% block scripts %}
     {% endblock %}
 </body>

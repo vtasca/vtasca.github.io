@@ -4,7 +4,7 @@ import json
 from markdown2 import Markdown
 from jinja2 import Environment, FileSystemLoader
 import datetime
-
+import random
 def setup_jinja():
     """Set up Jinja environment"""
     env = Environment(
@@ -15,7 +15,8 @@ def setup_jinja():
     # Add current year to all templates
     env.globals['now'] = type('', (), {'year': datetime.datetime.now().year})()
 
-    # 
+    # Random number for cache busting
+    env.globals['cache_bust'] = str(random.randint(0, 1000000))
     
     return env
 
