@@ -82,6 +82,7 @@ code {
 .site-header {
     padding: 2rem 0;
     margin-bottom: 2rem;
+    border-bottom: 1px solid #eee;
 }
 
 .main-nav {
@@ -268,7 +269,7 @@ code {
 
 @media (max-width: 768px) {
     .footer-content {
-        flex-direction: column;
+        flex-direction: column-reverse;
         text-align: center;
     }
     
@@ -276,3 +277,113 @@ code {
         justify-content: center;
     }
 }
+
+/* Article content styles */
+article {
+    max-width: 65ch;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+article p {
+    margin: 1.5rem 0;
+    line-height: 1.7;
+}
+
+article h1 {
+    font-size: 2.5rem;
+    margin: 2rem 0 1.5rem;
+    line-height: 1.2;
+}
+
+article h2 {
+    font-size: 2rem;
+    margin: 2.5rem 0 1rem;
+    line-height: 1.3;
+}
+
+article h3 {
+    font-size: 1.5rem;
+    margin: 2rem 0 1rem;
+    line-height: 1.4;
+}
+
+article h4 {
+    font-size: 1.25rem;
+    margin: 1.5rem 0 1rem;
+    line-height: 1.4;
+}
+
+article ul, article ol {
+    margin: 1.5rem 0;
+    padding-left: 2rem;
+}
+
+article li {
+    margin: 0.5rem 0;
+    line-height: 1.6;
+}
+
+article blockquote {
+    margin: 2rem 0;
+    padding: 1rem 1.5rem;
+    border-left: 4px solid #eee;
+    font-style: italic;
+    color: #555;
+}
+
+article pre {
+    margin: 2rem 0;
+    border-radius: 8px;
+    overflow-x: auto;
+}
+
+article code {
+    font-family: 'SF Mono', 'Menlo', 'Monaco', 'Courier New', monospace;
+    font-size: 0.8rem;
+}
+
+article img {
+    margin: 2rem auto;
+    border-radius: 8px;
+}
+
+article hr {
+    margin: 3rem 0;
+    border: 0;
+    border-top: 1px solid #eee;
+}
+
+article a {
+    color: #0066cc;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease;
+}
+
+article a:hover {
+    border-bottom-color: #0066cc;
+}
+
+@media (max-width: 768px) {
+    article {
+        padding: 1rem 0;
+    }
+    
+    article h1 {
+        font-size: 2rem;
+    }
+    
+    article h2 {
+        font-size: 1.75rem;
+    }
+    
+    article h3 {
+        font-size: 1.35rem;
+    }
+    
+    article h4 {
+        font-size: 1.15rem;
+    }
+}
+
