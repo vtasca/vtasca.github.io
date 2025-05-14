@@ -93,6 +93,12 @@ def extract_blog_metadata(posts, output_dir='src', filename='blog_metadata.json'
     return blog_data
 
 def export_markdown(block_id, output_dir='src'):
+
+    # Delete existing directories and their contents if they exist
+    if Path(output_dir + "/blog/md").exists():
+        shutil.rmtree(output_dir + "/blog/md", ignore_errors=True)
+    if Path(output_dir + "/blog/img").exists():
+        shutil.rmtree(output_dir + "/blog/img", ignore_errors=True)
     
     # Create directories
     Path(output_dir + "/blog/md").mkdir(exist_ok=True, parents=True)
