@@ -87,6 +87,10 @@ def copy_files(publish_dir, src_dir):
     if (src_dir / "blog/img").exists():
         shutil.copytree(src_dir / "blog/img", publish_dir / "blog/img")
 
+    # Favicon ico goes in the root
+    if (src_dir / "favicon.ico").exists():
+        shutil.copy(src_dir / "favicon.ico", publish_dir / "favicon.ico")
+
 
 def generate_blog_index(blog_posts, publish_dir, src_dir):
     """Generate the blog index page listing all posts"""
@@ -127,6 +131,24 @@ def generate_home(publish_dir):
     with open(publish_dir / "index.html", "w", encoding="utf-8") as f:
         f.write(html)
 
+def generate_rss_feed(blog_posts, publish_dir):
+    """Generate the RSS feed XML file"""
+    env = setup_jinja()
+    template = env.get_template("rss.xml")
+
+    # Sort posts by last edited time, newest first
+    sorted_posts = sorted(blog_posts, key=lambda x: x.get('last_edited_time', ''), reverse=True)
+
+    # Render template
+    xml = template.render(
+        posts=sorted_posts,
+        now=datetime.datetime.now()
+    )
+
+    # Write the RSS feed
+    with open(publish_dir / "blog/rss.xml", "w", encoding="utf-8") as f:
+        f.write(xml)
+
 if __name__ == "__main__":
     
     # Set up directories
@@ -145,3 +167,4 @@ if __name__ == "__main__":
     # Generate other pages
     generate_home(publish_dir)
     generate_blog_index(blog_posts, publish_dir, src_dir)
+    generate_rss_feed(blog_posts, publish_dir)
