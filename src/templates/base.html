@@ -33,6 +33,11 @@
 </pre>
             </a>
             </div>
+            <button class="hamburger-menu" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <div class="nav-links">
                 <a href="{{root_prefix}}/blog" class="nav-link">Blog</a>
                 <a href="{{root_prefix}}/contact" class="nav-link">Contact</a>
@@ -40,6 +45,34 @@
             </div>
         </nav>
     </header>
+
+    <div class="mobile-menu">
+        <div class="mobile-menu-content">
+            <div class="mobile-menu-header">
+                <a href="{{root_prefix}}/" class="brand-link">
+<pre class="ascii-logo">
+        __                             __         
+ _   __/ /_____ _______________ _ ____/ /__ _   __
+| | / / __/ __ `/ ___/ ___/ __ `// __  / _ \ | / /
+| |/ / /_/ /_/ (__  ) /__/ /_/ // /_/ /  __/ |/ / 
+|___/\__/\__,_/____/\___/\__,_(_)__,_/\___/|___/  
+</pre>
+            </a>
+            </div>
+            <div class="mobile-menu-links">
+                <a href="{{root_prefix}}/blog" class="mobile-nav-link">Blog</a>
+                <a href="{{root_prefix}}/contact" class="mobile-nav-link">Contact</a>
+                <a href="{{root_prefix}}/blog/rss.xml" class="mobile-nav-link">Feed</a>
+            </div>
+            <div class="mobile-menu-footer">
+                <div class="mobile-social-links">
+                    <a href="https://github.com/vtasca" class="social-link" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/vlad-tasca" class="social-link" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://www.kaggle.com/vladtasca" class="social-link" title="Kaggle"><i class="fab fa-kaggle"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <main>
         {% block content %}
