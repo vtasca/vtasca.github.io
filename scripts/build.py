@@ -149,6 +149,21 @@ def generate_rss_feed(blog_posts, publish_dir):
     with open(publish_dir / "blog/rss.xml", "w", encoding="utf-8") as f:
         f.write(xml)
 
+def generate_contact(publish_dir):
+    """Generate the contact page"""
+    env = setup_jinja()
+    template = env.get_template('contact.html')
+    
+    html = template.render(
+        title="Contact",
+        description="It's almost like shouting into the void",
+        static_prefix="static",
+        root_prefix="."
+    )
+    
+    with open(publish_dir / "contact.html", "w", encoding="utf-8") as f:
+        f.write(html)
+
 if __name__ == "__main__":
     
     # Set up directories
@@ -168,3 +183,4 @@ if __name__ == "__main__":
     generate_home(publish_dir)
     generate_blog_index(blog_posts, publish_dir, src_dir)
     generate_rss_feed(blog_posts, publish_dir)
+    generate_contact(publish_dir)

@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="contact-container">
+    <h1>Contact</h1>
+    <p>It's almost like shouting into the void.</p>
+    
+    <div class="form-message" id="form-message"></div>
+    
+    <form action="https://api.web3forms.com/submit" method="POST" class="contact-form" id="contact-form">
+        <input type="hidden" name="access_key" value="c033872f-7853-4b64-97d6-219770d053b4">
+        
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required placeholder="your@email.com">
+        </div>
+        
+        <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="6" required placeholder="What's on your mind?"></textarea>
+        </div>
+        
+        <div class="form-group">
+            <button type="submit" class="submit-button">Send Message</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.getElementById('contact-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const form = this;
+    const messageDiv = document.getElementById('form-message');
+    const submitButton = form.querySelector('.submit-button');
+    
+    // Add submitting state
+    form.classList.add('form-submitting');
+    submitButton.disabled = true;
+    
+    try {
+        const formData = new FormData(form);
+        const response = await fetch(form.action, {
+            method: 'POST',
+            body: formData
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            messageDiv.textContent = 'Message sent successfully! I\'ll get back to you soon.';
+            messageDiv.className = 'form-message success visible';
+            form.classList.add('form-hidden');
+        } else {
+            throw new Error(result.message || 'Something went wrong');
+        }
+    } catch (error) {
+        messageDiv.textContent = error.message || 'Failed to send message. Please try again.';
+        messageDiv.className = 'form-message error visible';
+    } finally {
+        form.classList.remove('form-submitting');
+        submitButton.disabled = false;
+    }
+});
+</script>
+{% endblock %}
