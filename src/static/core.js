@@ -9,11 +9,11 @@ function setupFaviconSwitch() {
   const staticPath = getStaticPath();
 
   const switchToInactive = function () {
-    changeFavicon(`${staticPath}/inactive-favicon.svg`, "image/svg+xml");
+    changeFavicon(`${staticPath}/earth-night.png`, "image/png");
   };
 
   const switchToActive = function () {
-    changeFavicon(`${staticPath}/favicon.svg`, "image/svg+xml");
+    changeFavicon(`${staticPath}/earth-day.png`, "image/png");
   };
 
   function changeFavicon(iconPath, iconType) {
