@@ -1,5 +1,18 @@
 [
   {
+    "id": "1b2ca28d-9485-80a7-9b34-e7b69593b82b",
+    "name": "Predicting the Fed’s actions for fun and profit",
+    "url": "predicting-the-feds-actions-for-fun-and-profit",
+    "description": "A closer look at the many ways of predicting FOMC actions and putting on specific views using Polymarket.",
+    "tags": [
+      "data",
+      "finance"
+    ],
+    "published": true,
+    "created_time": "2025-03-10T09:53:00.000Z",
+    "last_edited_time": "2025-06-01T20:25:00.000Z"
+  },
+  {
     "id": "f8d3a26f-1728-4c26-b8ac-964063087412",
     "name": "Getting started with web scraping in Python",
     "url": "getting-started-with-web-scraping-in-python",

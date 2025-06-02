@@ -94,13 +94,7 @@ def extract_blog_metadata(posts, output_dir='src', filename='blog_metadata.json'
 
 def export_markdown(block_id, output_dir='src'):
 
-    # Delete existing directories and their contents if they exist
-    if Path(output_dir + "/blog/md").exists():
-        shutil.rmtree(output_dir + "/blog/md", ignore_errors=True)
-    if Path(output_dir + "/blog/img").exists():
-        shutil.rmtree(output_dir + "/blog/img", ignore_errors=True)
-    
-    # Create directories
+    # Only create directories if they don't exist - don't delete them
     Path(output_dir + "/blog/md").mkdir(exist_ok=True, parents=True)
     Path(output_dir + "/blog/img").mkdir(exist_ok=True, parents=True)
 
@@ -157,6 +151,13 @@ if __name__ == "__main__":
     all_blog_posts = get_database_entries(DATABASE_ID)
 
     extract_blog_metadata(all_blog_posts, output_dir="src", filename="blog_metadata.json")
+
+    # Clean directories once before processing all posts
+    if Path("src/blog/md").exists():
+        shutil.rmtree("src/blog/md", ignore_errors=True)
+    if Path("src/blog/img").exists():
+        shutil.rmtree("src/blog/img", ignore_errors=True)
+    
 
     # Load blog metadata from JSON file
     with open("src/blog_metadata.json", "r") as f:
