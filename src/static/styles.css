@@ -351,6 +351,11 @@ article img {
     transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Equations */
+article math[display="block"] {
+    margin: 2rem 0;
+}
+
 /* Tables */
 article table {
     width: 100%;
