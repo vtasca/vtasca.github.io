@@ -5,6 +5,7 @@ from markdown2 import Markdown
 from jinja2 import Environment, FileSystemLoader
 import datetime
 import random
+
 def setup_jinja():
     """Set up Jinja environment"""
     env = Environment(
@@ -31,7 +32,7 @@ def convert_markdown_to_html(markdown_file_path, metadata=None, output_dir=Path(
         markdown_file_path (str): Path to the markdown file
         metadata (dict, optional): Post metadata including title, description, etc.
     """
-    markdowner = Markdown(extras=["fenced-code-blocks", "latex"])
+    markdowner = Markdown(extras=["fenced-code-blocks", "latex", "tables"])
     env = setup_jinja()
     template = env.get_template("blog-post.html")
 
