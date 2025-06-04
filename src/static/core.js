@@ -65,16 +65,6 @@ function setupMobileMenu() {
 
     hamburger.addEventListener('click', toggleMenu);
 
-    // Close menu when clicking a link
-    const mobileLinks = document.querySelectorAll('.mobile-nav-link');
-    mobileLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            if (mobileMenu.classList.contains('active')) {
-                toggleMenu();
-            }
-        });
-    });
-
     // Close menu when clicking outside
     mobileMenu.addEventListener('click', (e) => {
         if (e.target === mobileMenu) {
@@ -84,9 +74,6 @@ function setupMobileMenu() {
 
     return function cleanup() {
         hamburger.removeEventListener('click', toggleMenu);
-        mobileLinks.forEach(link => {
-            link.removeEventListener('click', toggleMenu);
-        });
         mobileMenu.removeEventListener('click', toggleMenu);
     };
 }
