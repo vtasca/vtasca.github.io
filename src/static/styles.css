@@ -357,7 +357,11 @@ article img {
 
 /* Equations */
 article math[display="block"] {
-    margin: 2rem 0;
+    padding: 1rem;
+    margin: 1rem 0;
+    max-width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
 }
 
 /* Tables */
