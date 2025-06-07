@@ -13,3 +13,6 @@ dependencies = [
     "python-dotenv>=1.0.1",
     "watchdog>=6.0.0",
 ]
+
+[tool.uv.sources]
+notion2md = { git = "https://github.com/vtasca/notion2md-extended.git" }
