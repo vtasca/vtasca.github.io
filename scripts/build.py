@@ -5,6 +5,7 @@ from markdown2 import Markdown
 from jinja2 import Environment, FileSystemLoader
 import datetime
 import random
+import re
 
 def setup_jinja():
     """Set up Jinja environment"""
@@ -40,6 +41,14 @@ def convert_markdown_to_html(markdown_file_path, metadata=None, output_dir=Path(
     with open(markdown_file_path) as f:
         content = f.read()
         html_content = markdowner.convert(content)
+        
+        # Pre-processing steps
+        html_content = re.sub(
+            r'(<math[^>]*display="block"[^>]*>.*?</math>)',
+            r'<div class="math-container">\1</div>',
+            html_content,
+            flags=re.DOTALL
+        )
 
     # Render template
     html = template.render(
@@ -101,7 +110,6 @@ def generate_blog_index(blog_posts, publish_dir, src_dir):
     sorted_posts = sorted(blog_posts, key=lambda x: x.get('date', ''), reverse=True)
 
     # Render template
-
     html = template.render(
         title="Blog",
         description="Hot takes, sorted chronologically",

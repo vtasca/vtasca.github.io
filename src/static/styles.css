@@ -356,13 +356,25 @@ article img {
 }
 
 /* Equations */
-article math[display="block"] {
+.math-container {
+    max-width: 100%;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
     padding: 1rem;
     margin: 1rem 0;
-    max-width: 100%;
-    overflow-x: auto;
+    box-sizing: border-box;
+    position: relative;
+    transform: translate3d(0, 0, 0);
+    text-align: center;
+}
+
+.math-container math[display="block"] {
     white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    text-align: left;
 }
 
 /* Tables */
