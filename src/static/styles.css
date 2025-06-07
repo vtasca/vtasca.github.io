@@ -652,7 +652,6 @@ article a:hover {
     background: none;
     border: none;
     cursor: pointer;
-    padding: 0.5rem;
     z-index: 1000;
 }
 
@@ -798,7 +797,6 @@ article a:hover {
     background: none;
     border: none;
     cursor: pointer;
-    padding: 0.5rem;
     color: var(--text-color-secondary);
     transition: color 0.3s ease;
     display: flex;
