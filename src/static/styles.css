@@ -825,5 +825,10 @@ article a:hover {
     height: auto;
     max-height: 400px;
     object-fit: contain;
+    cursor: default;
+    -webkit-user-drag: none;
+    user-drag: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 

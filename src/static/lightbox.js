@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
         </svg>
     `;
 
-    // Add wrappers and expand icons to all article images
-    document.querySelectorAll('article img').forEach(img => {
+    // Add wrappers and expand icons to all article images inside p tags
+    document.querySelectorAll('article p img').forEach(img => {
         // Create wrapper
         const wrapper = document.createElement('span');
         wrapper.className = 'article-image-wrapper';
