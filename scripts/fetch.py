@@ -8,6 +8,7 @@ import zipfile
 import re
 import unicodedata
 import requests
+from process_svg import process_svg
 
 from dotenv import load_dotenv
 
@@ -121,6 +122,10 @@ def export_markdown(block_id, output_dir='src'):
             image_path = Path(output_dir + "/blog/img") / f"{block_id}{image_ext}"
             with open(image_path, 'wb') as f:
                 f.write(image_response.content)
+            
+            # Process SVG files if the image is an SVG
+            if image_ext.lower() == '.svg':
+                process_svg(str(image_path), '#2c2c2c')
 
     MarkdownExporter(
         block_id=block_id, output_path="markdown_zip_container", download=True
