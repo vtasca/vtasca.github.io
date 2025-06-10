@@ -89,7 +89,6 @@ def extract_blog_metadata(posts, output_dir='src', filename='blog_metadata.json'
             "published": True,  # We know it's True since we filtered
             "created_time": post.get("created_time"),
             "last_edited_time": post.get("last_edited_time"),
-            "image_url": image_url,  # Add the image URL to metadata
         }
 
         blog_data.append(metadata)
