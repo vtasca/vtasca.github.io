@@ -814,3 +814,16 @@ article a:hover {
     fill: currentColor;
 }
 
+.blog-header-image {
+    max-width: 100%;
+    margin: 0 auto 2rem auto;
+    text-align: center;
+}
+
+.blog-header-image .header-image {
+    max-width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: contain;
+}
+

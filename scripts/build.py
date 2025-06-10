@@ -56,7 +56,8 @@ def convert_markdown_to_html(markdown_file_path, metadata=None, output_dir=Path(
         description=metadata.get("description", "") if metadata else "",
         content=html_content,
         static_prefix="../static",
-        root_prefix=".."
+        root_prefix="..",
+        id=metadata.get("id", "") if metadata else "",
     )
 
     # Use the URL from metadata for the filename, fallback to original name if no metadata

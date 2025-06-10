@@ -7,6 +7,7 @@ import shutil
 import zipfile
 import re
 import unicodedata
+import requests
 
 from dotenv import load_dotenv
 
@@ -67,10 +68,13 @@ def extract_blog_metadata(posts, output_dir='src', filename='blog_metadata.json'
         if not properties.get("Published Status", {}).get("checkbox", False):
             continue
 
-        # ... existing code ...
         def get_text_content(prop_name, prop_type="rich_text"):
             prop = properties.get(prop_name, {}).get(prop_type, [])
             return prop[0].get("plain_text", "") if prop else ""
+
+        # Get the image URL if it exists
+        image_prop = properties.get("Image", {}).get("files", [])
+        image_url = image_prop[0].get("file", {}).get("url") if image_prop else None
 
         metadata = {
             "id": post["id"],
@@ -84,6 +88,7 @@ def extract_blog_metadata(posts, output_dir='src', filename='blog_metadata.json'
             "published": True,  # We know it's True since we filtered
             "created_time": post.get("created_time"),
             "last_edited_time": post.get("last_edited_time"),
+            "image_url": image_url,  # Add the image URL to metadata
         }
 
         blog_data.append(metadata)
@@ -93,10 +98,29 @@ def extract_blog_metadata(posts, output_dir='src', filename='blog_metadata.json'
     return blog_data
 
 def export_markdown(block_id, output_dir='src'):
-
     # Only create directories if they don't exist - don't delete them
     Path(output_dir + "/blog/md").mkdir(exist_ok=True, parents=True)
     Path(output_dir + "/blog/img").mkdir(exist_ok=True, parents=True)
+
+    # Get the post metadata to check for header image
+    notion = Client(auth=NOTION_TOKEN)
+    post = notion.pages.retrieve(page_id=block_id)
+    properties = post["properties"]
+    
+    # Get the image URL if it exists
+    image_prop = properties.get("Image", {}).get("files", [])
+    image_url = image_prop[0].get("file", {}).get("url") if image_prop else None
+    
+    # Download header image if it exists
+    if image_url:
+        image_response = requests.get(image_url)
+        if image_response.status_code == 200:
+            # Extract file extension from URL, default to .png if not found
+            image_ext = Path(image_url.split('?')[0]).suffix or '.png'
+            # Save the image with the post ID as filename
+            image_path = Path(output_dir + "/blog/img") / f"{block_id}{image_ext}"
+            with open(image_path, 'wb') as f:
+                f.write(image_response.content)
 
     MarkdownExporter(
         block_id=block_id, output_path="markdown_zip_container", download=True
