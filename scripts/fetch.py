@@ -125,7 +125,7 @@ def export_markdown(block_id, output_dir='src'):
             
             # Process SVG files if the image is an SVG
             if image_ext.lower() == '.svg':
-                process_svg(str(image_path), '#2c2c2c')
+                process_svg(str(image_path), '#e0e0e0')
 
     MarkdownExporter(
         block_id=block_id, output_path="markdown_zip_container", download=True
