@@ -126,6 +126,10 @@ def export_markdown(block_id, output_dir='src'):
             if image_ext.lower() == '.svg':
                 process_svg(str(image_path), '#e0e0e0')
 
+                light_svg_path = image_path.with_suffix('.light.svg')
+                shutil.copy(image_path, light_svg_path)
+                process_svg(str(light_svg_path), '#2c2c2c')
+
     MarkdownExporter(
         block_id=block_id, output_path="markdown_zip_container", download=True
     ).export()

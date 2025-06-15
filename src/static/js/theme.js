@@ -21,8 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Update header image source based on theme
         const headerImage = document.querySelector('.blog-header-image .header-image');
         if (headerImage) {
-            const baseSrc = headerImage.src.replace('-light.svg', '').replace('.svg', '');
-            headerImage.src = theme === 'light' ? `${baseSrc}-light.svg` : `${baseSrc}.svg`;
+            const baseSrc = headerImage.src.replace('.light.svg', '').replace('.svg', '');
+            headerImage.src = theme === 'light' ? `${baseSrc}.light.svg` : `${baseSrc}.svg`;
         }
     };
     
