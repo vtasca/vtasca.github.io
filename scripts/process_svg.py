@@ -3,6 +3,7 @@ from collections import defaultdict
 import colorsys
 import os
 from lxml import etree
+from optimize_svg import optimize_svg
 
 def hex_to_rgb(hex_color):
     # Remove # if present
@@ -98,6 +99,10 @@ def process_svg(svg_file, fill_color):
     
     # Save the modified SVG back to the original file
     tree.write(svg_file, pretty_print=True, xml_declaration=True, encoding='utf-8')
+
+    # Optimize the SVG
+    optimize_svg(svg_file)
+
     return svg_file
 
 def analyze_svg_colors(svg_file):
