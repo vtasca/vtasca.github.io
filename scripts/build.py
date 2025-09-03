@@ -182,6 +182,22 @@ def generate_contact(publish_dir):
         f.write(html)
 
 
+def generate_tools(publish_dir):
+    """Generate the tools page"""
+    env = setup_jinja()
+    template = env.get_template("tools.html")
+
+    html = template.render(
+        title="Tools",
+        description="Useful tools for developers and AI enthusiasts",
+        static_prefix="static",
+        root_prefix=".",
+    )
+
+    with open(publish_dir / "tools.html", "w", encoding="utf-8") as f:
+        f.write(html)
+
+
 def generate_sitemap(publish_dir, src_dir, blog_posts):
     """Generate sitemap.xml"""
 
@@ -236,4 +252,5 @@ if __name__ == "__main__":
     generate_blog_index(blog_posts, publish_dir, src_dir)
     generate_rss_feed(blog_posts, publish_dir)
     generate_contact(publish_dir)
+    generate_tools(publish_dir)
     generate_sitemap(publish_dir, src_dir, blog_posts)

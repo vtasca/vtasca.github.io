@@ -832,3 +832,348 @@ article a:hover {
     user-select: none;
 }
 
+/* Tools Page Styles */
+.tools-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.tools-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.tools-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.tools-header p {
+    font-size: 1.1rem;
+    color: var(--text-color-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.tokenizer-tool {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.tool-section {
+    background: var(--bg-color-secondary);
+    border-radius: 12px;
+    padding: 2rem;
+    border: 1px solid var(--border-color);
+}
+
+.tool-section h2 {
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+    font-size: 1.5rem;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.input-group label {
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.input-group textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--bg-color);
+    color: var(--text-color);
+    font-family: inherit;
+    font-size: 1rem;
+    resize: vertical;
+    transition: border-color 0.3s ease;
+}
+
+.input-group textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+}
+
+.model-selector {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.model-selector label {
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.model-selector select {
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--bg-color);
+    color: var(--text-color);
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.result-card {
+    background: var(--bg-color);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.result-card h3 {
+    margin-bottom: 0.5rem;
+    color: var(--text-color-secondary);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.result-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+.cost-breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    font-size: 0.9rem;
+}
+
+.total-cost {
+    font-weight: 700;
+    color: var(--accent-color);
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.token-visualization {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--bg-color);
+}
+
+.token-list {
+    padding: 1rem;
+}
+
+.placeholder-text {
+    color: var(--text-color-secondary);
+    text-align: center;
+    font-style: italic;
+}
+
+.token-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+}
+
+.token-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-color-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 60px;
+    max-width: 120px;
+}
+
+.token-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.token-text {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-color);
+    text-align: center;
+    word-break: break-all;
+    margin-bottom: 0.25rem;
+}
+
+.token-id {
+    font-size: 0.7rem;
+    color: var(--text-color-secondary);
+    font-family: monospace;
+}
+
+.token-word {
+    background: rgba(34, 197, 94, 0.1);
+    border-color: rgba(34, 197, 94, 0.3);
+}
+
+.token-number {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: rgba(59, 130, 246, 0.3);
+}
+
+.token-punctuation {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.3);
+}
+
+.token-whitespace {
+    background: rgba(156, 163, 175, 0.1);
+    border-color: rgba(156, 163, 175, 0.3);
+}
+
+.token-mixed {
+    background: rgba(168, 85, 247, 0.1);
+    border-color: rgba(168, 85, 247, 0.3);
+}
+
+.chat-analyzer {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.chat-input {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.chat-input label {
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.chat-input textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--bg-color);
+    color: var(--text-color);
+    font-family: monospace;
+    font-size: 0.9rem;
+    resize: vertical;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-primary {
+    background: var(--accent-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--accent-color-hover);
+    transform: translateY(-1px);
+}
+
+.chat-results {
+    margin-top: 1rem;
+    padding: 1.5rem;
+    background: var(--bg-color);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.chat-results h3 {
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.chat-stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+.chat-stat {
+    text-align: center;
+    padding: 1rem;
+    background: var(--bg-color-secondary);
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+}
+
+.chat-stat h4 {
+    margin-bottom: 0.5rem;
+    color: var(--text-color-secondary);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.chat-stat span {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+/* Responsive design for tools */
+@media (max-width: 768px) {
+    .tools-container {
+        padding: 1rem;
+    }
+    
+    .tools-header h1 {
+        font-size: 2rem;
+    }
+    
+    .tool-section {
+        padding: 1.5rem;
+    }
+    
+    .results-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .token-grid {
+        gap: 0.5rem;
+    }
+    
+    .token-item {
+        min-width: 80px;
+        max-width: 100px;
+    }
+    
+    .chat-stat-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
