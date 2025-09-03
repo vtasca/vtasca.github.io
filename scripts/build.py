@@ -221,36 +221,43 @@ def generate_sitemap(publish_dir, src_dir, blog_posts):
             # Blog posts use the blog-post.html template
             html_to_template_mapping[html_file] = "blog-post.html"
 
-    # Get last modified time for each file by checking the source template
+        # Get last modified time for each file by checking the source template
     last_modified = {}
     for html_file in html_files:
         if html_file in html_to_template_mapping:
             template_name = html_to_template_mapping[html_file]
             template_path = src_dir / "templates" / template_name
-
+            
             if template_path.exists():
                 # Use template modification time for static pages
                 last_modified[html_file] = dt.fromtimestamp(
                     template_path.stat().st_mtime
-                ).strftime("%Y-%m-%d")
+                ).strftime("%Y-%m-%dT%H:%M:%S")
             else:
                 # Fallback to HTML file modification time
                 html_path = publish_dir / html_file
                 if html_path.exists():
                     last_modified[html_file] = dt.fromtimestamp(
                         html_path.stat().st_mtime
-                    ).strftime("%Y-%m-%d")
+                    ).strftime("%Y-%m-%dT%H:%M:%S")
         else:
             # For files not in mapping, use HTML file modification time
             html_path = publish_dir / html_file
             if html_path.exists():
                 last_modified[html_file] = dt.fromtimestamp(
                     html_path.stat().st_mtime
-                ).strftime("%Y-%m-%d")
+                ).strftime("%Y-%m-%dT%H:%M:%S")
 
     # Add each URL to sitemap with lastmod
     for html_file in html_files:
-        url = f"<url>\n<loc>https://vtasca.dev/{html_file}</loc>\n"
+        # Clean up the URL: remove index.html and .html suffixes
+        clean_url = html_file
+        if clean_url.endswith("index.html"):
+            clean_url = clean_url[:-10]  # Remove "index.html"
+        elif clean_url.endswith(".html"):
+            clean_url = clean_url[:-5]   # Remove ".html"
+        
+        url = f"<url>\n<loc>https://vtasca.dev/{clean_url}</loc>\n"
         if html_file in last_modified:
             url += f"<lastmod>{last_modified[html_file]}</lastmod>\n"
         url += "</url>\n"
