@@ -185,17 +185,8 @@ def generate_contact(publish_dir):
 def generate_sitemap(publish_dir, src_dir, blog_posts):
     """Generate sitemap.xml"""
 
-    sitemap = """
-                <?xml version='1.0' encoding='utf-8'?>
-                <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-                """
-
-    # Create mapping between templates and HTML files
-    template_to_html_mapping = {
-        "home.html": "index.html",
-        "contact.html": "contact.html",
-        "blog-index.html": "blog/index.html",
-    }
+    sitemap = """<?xml version='1.0' encoding='utf-8'?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">"""
 
     # Get all HTML files recursively from publish_dir
     html_files = []
@@ -204,51 +195,7 @@ def generate_sitemap(publish_dir, src_dir, blog_posts):
         rel_path = path.relative_to(publish_dir)
         html_files.append(str(rel_path))
 
-    # Get all template files
-    templates = []
-    for path in (src_dir / "templates").rglob("*.html"):
-        templates.append(path.relative_to(src_dir / "templates"))
-
-    # Create reverse mapping from HTML files to templates
-    html_to_template_mapping = {}
-    for template, html_file in template_to_html_mapping.items():
-        html_to_template_mapping[html_file] = template
-
-    # Add blog posts to the mapping
-    for post in blog_posts:
-        if "url" in post:
-            html_file = f"blog/{post['url']}.html"
-            # Blog posts use the blog-post.html template
-            html_to_template_mapping[html_file] = "blog-post.html"
-
-        # Get last modified time for each file by checking the source template
-    last_modified = {}
-    for html_file in html_files:
-        if html_file in html_to_template_mapping:
-            template_name = html_to_template_mapping[html_file]
-            template_path = src_dir / "templates" / template_name
-            
-            if template_path.exists():
-                # Use template modification time for static pages
-                last_modified[html_file] = dt.fromtimestamp(
-                    template_path.stat().st_mtime
-                ).strftime("%Y-%m-%dT%H:%M:%S")
-            else:
-                # Fallback to HTML file modification time
-                html_path = publish_dir / html_file
-                if html_path.exists():
-                    last_modified[html_file] = dt.fromtimestamp(
-                        html_path.stat().st_mtime
-                    ).strftime("%Y-%m-%dT%H:%M:%S")
-        else:
-            # For files not in mapping, use HTML file modification time
-            html_path = publish_dir / html_file
-            if html_path.exists():
-                last_modified[html_file] = dt.fromtimestamp(
-                    html_path.stat().st_mtime
-                ).strftime("%Y-%m-%dT%H:%M:%S")
-
-    # Add each URL to sitemap with lastmod
+    # Add each URL to sitemap
     for html_file in html_files:
         # Clean up the URL: remove index.html and .html suffixes
         clean_url = html_file
@@ -257,17 +204,13 @@ def generate_sitemap(publish_dir, src_dir, blog_posts):
         elif clean_url.endswith(".html"):
             clean_url = clean_url[:-5]   # Remove ".html"
         
-        url = f"<url>\n<loc>https://vtasca.dev/{clean_url}</loc>\n"
-        if html_file in last_modified:
-            url += f"<lastmod>{last_modified[html_file]}</lastmod>\n"
-        url += "</url>\n"
-        sitemap += url
+        sitemap += f"\n<url>\n<loc>https://vtasca.dev/{clean_url}</loc>\n</url>"
 
-    sitemap += "</urlset>"
+    sitemap += "\n</urlset>"
 
     # Write sitemap file
     with open(publish_dir / "sitemap.xml", "w", encoding="utf-8") as f:
-        f.write(sitemap.strip())
+        f.write(sitemap)
 
 
 if __name__ == "__main__":
