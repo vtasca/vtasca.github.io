@@ -3,84 +3,53 @@
 {% block content %}
 <div class="tools-container">
     <div class="tools-header">
-        <h1>GPT Tokenizer Tool</h1>
-        <p>Analyze and tokenize text using OpenAI's GPT models. This tool helps you understand how your text will be processed by GPT models and estimate token usage.</p>
+        <h1>Developer Tools</h1>
+        <p>Useful tools for developers and AI enthusiasts. Choose a tool below to get started.</p>
     </div>
 
-    <div class="tokenizer-tool">
-        <div class="tool-section">
-            <h2>Text Input</h2>
-            <div class="input-group">
-                <label for="text-input">Enter your text:</label>
-                <textarea id="text-input" placeholder="Type or paste your text here..." rows="8"></textarea>
+    <!-- AI & Text Processing Tools -->
+    <div class="tool-category">
+        <h2>AI & Text Processing</h2>
+        <div class="tool-grid">
+            <div class="tool-card">
+                <div class="tool-icon">🔤</div>
+                <h3>GPT Tokenizer</h3>
+                <p>Analyze and tokenize text using OpenAI's GPT models. Understand how your text will be processed and estimate token usage.</p>
+                <a href="/tools/tokenizer" class="btn btn-primary">Open Tool</a>
             </div>
         </div>
+    </div>
 
-        <div class="tool-section">
-            <h2>Model Selection</h2>
-            <div class="model-selector">
-                <label for="model-select">Choose GPT Model:</label>
-                <select id="model-select">
-                    <option value="gpt-4o">GPT-4o (o200k_base)</option>
-                    <option value="gpt-4">GPT-4 (cl100k_base)</option>
-                    <option value="gpt-3.5-turbo">GPT-3.5 Turbo (cl100k_base)</option>
-                    <option value="text-davinci-003">Text Davinci 003 (p50k_base)</option>
-                </select>
+    <!-- Image Processing Tools -->
+    <div class="tool-category">
+        <h2>Image Processing</h2>
+        <div class="tool-grid">
+            <div class="tool-card">
+                <div class="tool-icon">🎨</div>
+                <h3>Image Dithering</h3>
+                <p>Create retro dark aesthetics by applying dithering algorithms to your images. Perfect for achieving that classic computer graphics look.</p>
+                <a href="/tools/dithering" class="btn btn-primary">Open Tool</a>
             </div>
         </div>
+    </div>
 
-        <div class="tool-section">
-            <h2>Analysis Results</h2>
-            <div class="results-grid">
-                <div class="result-card">
-                    <h3>Token Count</h3>
-                    <div class="result-value" id="token-count">-</div>
-                </div>
-                <div class="result-card">
-                    <h3>Character Count</h3>
-                    <div class="result-value" id="char-count">-</div>
-                </div>
-                <div class="result-card">
-                    <h3>Word Count</h3>
-                    <div class="result-value" id="word-count">-</div>
-                </div>
-                <div class="result-card">
-                    <h3>Estimated Cost</h3>
-                    <div class="result-value" id="estimated-cost">-</div>
-                </div>
+    <!-- Coming Soon -->
+    <div class="tool-category">
+        <h2>Coming Soon</h2>
+        <div class="tool-grid">
+            <div class="tool-card coming-soon">
+                <div class="tool-icon">📊</div>
+                <h3>Data Visualizer</h3>
+                <p>Create interactive charts and graphs from your data. Support for CSV, JSON, and more formats.</p>
+                <span class="btn btn-disabled">Coming Soon</span>
             </div>
-        </div>
-
-        <div class="tool-section">
-            <h2>Token Visualization</h2>
-            <div class="token-visualization">
-                <div class="token-list" id="token-list">
-                    <p class="placeholder-text">Tokens will appear here...</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="tool-section">
-            <h2>Chat Analysis</h2>
-            <div class="chat-analyzer">
-                <div class="chat-input">
-                    <label for="chat-input">Enter chat messages (JSON format):</label>
-                    <textarea id="chat-input" placeholder='[{"role": "user", "content": "Hello"}, {"role": "assistant", "content": "Hi there!"}]' rows="6"></textarea>
-                </div>
-                <button id="analyze-chat-btn" class="btn btn-primary">Analyze Chat</button>
-                <div class="chat-results" id="chat-results" style="display: none;">
-                    <h3>Chat Analysis Results</h3>
-                    <div class="chat-stats" id="chat-stats"></div>
-                </div>
+            <div class="tool-card coming-soon">
+                <div class="tool-icon">🔧</div>
+                <h3>Code Formatter</h3>
+                <p>Format and beautify your code in multiple languages. Support for JavaScript, Python, HTML, CSS, and more.</p>
+                <span class="btn btn-disabled">Coming Soon</span>
             </div>
         </div>
     </div>
 </div>
-{% endblock %}
-
-{% block scripts %}
-<script src="https://unpkg.com/gpt-tokenizer@3.0.1/dist/o200k_base.js"></script>
-<script src="https://unpkg.com/gpt-tokenizer@3.0.1/dist/cl100k_base.js"></script>
-<script src="https://unpkg.com/gpt-tokenizer@3.0.1/dist/p50k_base.js"></script>
-<script src="{{static_prefix}}/js/tools/tokenizer.js?v={{cache_bust}}"></script>
 {% endblock %} 

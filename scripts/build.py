@@ -198,6 +198,37 @@ def generate_tools(publish_dir):
         f.write(html)
 
 
+def generate_tool_pages(publish_dir):
+    """Generate individual tool pages"""
+    env = setup_jinja()
+    
+    # Create tools directory
+    tools_dir = publish_dir / "tools"
+    tools_dir.mkdir(exist_ok=True)
+    
+    # Generate tokenizer page
+    tokenizer_template = env.get_template("tokenizer.html")
+    tokenizer_html = tokenizer_template.render(
+        title="GPT Tokenizer Tool",
+        description="Analyze and tokenize text using OpenAI's GPT models",
+        static_prefix="../static",
+        root_prefix="..",
+    )
+    with open(tools_dir / "tokenizer.html", "w", encoding="utf-8") as f:
+        f.write(tokenizer_html)
+    
+    # Generate dithering page
+    dithering_template = env.get_template("dithering.html")
+    dithering_html = dithering_template.render(
+        title="Image Dithering Tool",
+        description="Create retro dark aesthetics by applying dithering algorithms to your images",
+        static_prefix="../static",
+        root_prefix="..",
+    )
+    with open(tools_dir / "dithering.html", "w", encoding="utf-8") as f:
+        f.write(dithering_html)
+
+
 def generate_sitemap(publish_dir, src_dir, blog_posts):
     """Generate sitemap.xml"""
 
@@ -253,4 +284,5 @@ if __name__ == "__main__":
     generate_rss_feed(blog_posts, publish_dir)
     generate_contact(publish_dir)
     generate_tools(publish_dir)
+    generate_tool_pages(publish_dir)
     generate_sitemap(publish_dir, src_dir, blog_posts)

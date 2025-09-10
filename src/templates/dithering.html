@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="tool-page-container">
+    <div class="tool-header">
+        <nav class="breadcrumb">
+            <a href="/tools">Tools</a> / <span>Image Dithering</span>
+        </nav>
+        <h1>Image Dithering Tool</h1>
+        <p>Create retro dark aesthetics by applying dithering algorithms to your images. Perfect for achieving that classic computer graphics look.</p>
+    </div>
+
+    <div class="dithering-tool">
+        <div class="tool-section">
+            <h3>Image Upload</h3>
+            <div class="input-group">
+                <label for="image-input">Select an image:</label>
+                <input type="file" id="image-input" accept="image/*">
+            </div>
+        </div>
+
+        <div class="tool-section">
+            <h3>Dithering Settings</h3>
+            <div class="settings-grid">
+                <div class="setting-group">
+                    <label for="algorithm-select">Dithering Algorithm:</label>
+                    <select id="algorithm-select">
+                        <option value="floyd-steinberg">Floyd-Steinberg</option>
+                        <option value="ordered">Ordered Dithering</option>
+                        <option value="atkinson">Atkinson</option>
+                        <option value="bayer">Bayer Matrix</option>
+                    </select>
+                </div>
+                
+                <div class="setting-group">
+                    <label for="color-count-select">Color Count:</label>
+                    <select id="color-count-select">
+                        <option value="2">2 colors (B&W)</option>
+                        <option value="4">4 colors</option>
+                        <option value="8">8 colors</option>
+                        <option value="16">16 colors</option>
+                    </select>
+                </div>
+                
+                <div class="setting-group">
+                    <label for="contrast-slider">Contrast: <span id="contrast-value">1.0</span></label>
+                    <input type="range" id="contrast-slider" min="0.1" max="3.0" step="0.1" value="1.0">
+                </div>
+                
+                <div class="setting-group">
+                    <label for="brightness-slider">Brightness: <span id="brightness-value">0</span></label>
+                    <input type="range" id="brightness-slider" min="-100" max="100" step="5" value="0">
+                </div>
+            </div>
+        </div>
+
+        <div class="tool-section">
+            <h3>Preview</h3>
+            <div class="image-preview">
+                <div class="preview-container">
+                    <div class="preview-item">
+                        <h4>Original</h4>
+                        <canvas id="input-canvas" width="400" height="300"></canvas>
+                    </div>
+                    <div class="preview-item">
+                        <h4>Dithered</h4>
+                        <canvas id="output-canvas" width="400" height="300"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tool-section">
+            <h3>Actions</h3>
+            <div class="action-buttons">
+                <button id="dither-btn" class="btn btn-primary">Apply Dithering</button>
+                <button id="download-btn" class="btn btn-secondary">Download Result</button>
+                <button id="reset-btn" class="btn btn-outline">Reset</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{static_prefix}}/js/tools/dithering.js?v={{cache_bust}}"></script>
+{% endblock %}
