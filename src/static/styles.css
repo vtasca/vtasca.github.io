@@ -1481,9 +1481,15 @@ article a:hover {
     flex-grow: 1;
 }
 
-.tool-card .btn {
-    align-self: flex-start;
-    margin-top: auto;
+.tool-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.tool-card-link:hover {
+    text-decoration: none;
+    color: inherit;
 }
 
 .btn-disabled {
