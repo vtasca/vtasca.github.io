@@ -14,6 +14,7 @@ class ImageDitheringTool {
     async init() {
         this.setupCanvas();
         this.setupEventListeners();
+        this.loadDefaultImage();
     }
 
     setupCanvas() {
@@ -112,6 +113,12 @@ class ImageDitheringTool {
             this.showError('Failed to load image.');
         };
         img.src = src;
+    }
+
+    loadDefaultImage() {
+        // Load the default sample image
+        const defaultImageSrc = '/static/jardin-a-bordighera.jpg';
+        this.loadImage(defaultImageSrc);
     }
 
     displayOriginalImage(img) {

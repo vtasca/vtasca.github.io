@@ -13,22 +13,18 @@
     <div class="tokenizer-tool">
         <div class="tool-section">
             <h2>Text Input</h2>
-            <div class="input-group">
-                <label for="text-input">Enter your text:</label>
-                <textarea id="text-input" placeholder="Type or paste your text here..." rows="8"></textarea>
-            </div>
-        </div>
-
-        <div class="tool-section">
-            <h2>Model Selection</h2>
             <div class="model-selector">
-                <label for="model-select">Choose GPT Model:</label>
+                <label for="model-select">Tokenizer model</label>
                 <select id="model-select">
                     <option value="gpt-4o">GPT-4o (o200k_base)</option>
                     <option value="gpt-4">GPT-4 (cl100k_base)</option>
                     <option value="gpt-3.5-turbo">GPT-3.5 Turbo (cl100k_base)</option>
                     <option value="text-davinci-003">Text Davinci 003 (p50k_base)</option>
                 </select>
+            </div>
+            <div class="input-group">
+                <label for="text-input">Enter your text</label>
+                <textarea id="text-input" placeholder="Type or paste your text here..." rows="8"></textarea>
             </div>
         </div>
 

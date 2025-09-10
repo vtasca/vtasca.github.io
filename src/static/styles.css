@@ -883,6 +883,10 @@ article a:hover {
     font-size: 1.5rem;
 }
 
+.tool-section div {
+    margin-bottom: 20px;
+}
+
 .input-group {
     display: flex;
     flex-direction: column;
@@ -917,6 +921,7 @@ article a:hover {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    margin-bottom: 20px;
 }
 
 .model-selector label {
@@ -936,7 +941,7 @@ article a:hover {
 
 .results-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: 1fr 1fr;
     gap: 1rem;
 }
 
