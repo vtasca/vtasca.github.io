@@ -1,0 +1,95 @@
+html {
+    scrollbar-gutter: stable;
+}
+
+body {
+    font-family: Charter, 'Bitstream Charter', 'Sitka Text', Cambria, serif;
+    font-weight: normal;
+    line-height: 1.4;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1rem;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+h1 {
+    font-size: 1.8rem;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+    font-weight: normal;
+    letter-spacing: 0.5px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+code {
+    border-radius: 10px;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.social-links a {
+    text-decoration: none;
+    color: var(--text-color-secondary);
+    transition: color 0.3s ease;
+    font-size: 2.5rem;
+}
+
+.social-links a:hover {
+    color: var(--text-color);
+}
+
+.artwork-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 4rem;
+}
+
+.artwork-container img {
+    width: 100%;
+    max-height: calc(100vh - 150px);
+    object-fit: contain;
+    /* border-radius: 8px; */
+}
+
+.artwork-caption {
+    text-align: center;
+    color: var(--text-color-secondary);
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+    font-style: italic;
+}
+
+.ascii-logo {
+    margin: 0;
+    padding: 0;
+    font-family: monospace;
+    font-size: 0.5rem;
+    line-height: 1.2;
+    white-space: pre;
+    color: inherit;
+    background: none;
+    border: none;
+    display: inline-block;
+}

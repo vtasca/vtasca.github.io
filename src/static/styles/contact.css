@@ -1,0 +1,88 @@
+/* Contact page styles */
+.contact-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.contact-form {
+    margin-top: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--form-border);
+    font-size: 1rem;
+    font-family: inherit;
+    background-color: inherit;
+    color: var(--text-color);
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.submit-button {
+    background-color: var(--button-bg);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.submit-button:hover {
+    background-color: var(--button-hover-bg);
+}
+
+/* Form submission states */
+.form-message {
+    display: none;
+    padding: 1rem;
+    margin: 1rem 0;
+    text-align: center;
+}
+
+.form-message.success {
+    display: block;
+    background-color: var(--success-bg);
+    color: var(--success-color);
+    border: 1px solid var(--success-border);
+}
+
+.form-message.error {
+    display: block;
+    background-color: var(--error-bg);
+    color: var(--error-color);
+    border: 1px solid var(--error-border);
+}
+
+.form-submitting .submit-button {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.form-submitting .submit-button::after {
+    content: '...';
+}
+
+.form-hidden {
+    display: none;
+}
+
+.form-message.visible {
+    display: block;
+}
