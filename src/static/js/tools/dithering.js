@@ -5,6 +5,9 @@ class ImageDitheringTool {
         this.ctx = null;
         this.originalImageData = null;
         this.currentImage = null;
+        this.fullSizeCanvas = null;
+        this.fullSizeCtx = null;
+        this.fullSizeImageData = null;
         this.init();
     }
 
@@ -27,6 +30,10 @@ class ImageDitheringTool {
             this.outputCanvas = outputCanvas;
             this.outputCtx = outputCanvas.getContext('2d');
         }
+
+        // Create full-size canvas for processing and downloading
+        this.fullSizeCanvas = document.createElement('canvas');
+        this.fullSizeCtx = this.fullSizeCanvas.getContext('2d');
     }
 
     setupEventListeners() {
@@ -115,13 +122,21 @@ class ImageDitheringTool {
         const maxHeight = 300;
         let { width, height } = this.calculateDimensions(img.width, img.height, maxWidth, maxHeight);
 
+        // Set preview canvas dimensions
         this.inputCanvas.width = width;
         this.inputCanvas.height = height;
         this.outputCanvas.width = width;
         this.outputCanvas.height = height;
 
+        // Draw preview image
         this.inputCtx.drawImage(img, 0, 0, width, height);
         this.originalImageData = this.inputCtx.getImageData(0, 0, width, height);
+
+        // Set full-size canvas to original image dimensions
+        this.fullSizeCanvas.width = img.width;
+        this.fullSizeCanvas.height = img.height;
+        this.fullSizeCtx.drawImage(img, 0, 0);
+        this.fullSizeImageData = this.fullSizeCtx.getImageData(0, 0, img.width, img.height);
     }
 
     calculateDimensions(imgWidth, imgHeight, maxWidth, maxHeight) {
@@ -133,22 +148,24 @@ class ImageDitheringTool {
     }
 
     updatePreview() {
-        if (!this.originalImageData) return;
+        if (!this.originalImageData || !this.fullSizeImageData) return;
 
         const algorithm = document.getElementById('algorithm-select')?.value || 'floyd-steinberg';
         const colorCount = parseInt(document.getElementById('color-count-select')?.value || '4');
         const contrast = parseFloat(document.getElementById('contrast-slider')?.value || '1.0');
         const brightness = parseFloat(document.getElementById('brightness-slider')?.value || '0.0');
 
-        // Apply adjustments and dithering
-        const processedData = this.processImage(this.originalImageData, {
-            algorithm,
-            colorCount,
-            contrast,
-            brightness
-        });
+        const options = { algorithm, colorCount, contrast, brightness };
 
-        this.displayProcessedImage(processedData);
+        // Process full-size image for download
+        const fullSizeProcessedData = this.processImage(this.fullSizeImageData, options);
+        
+        // Store the full-size processed data for download
+        this.fullSizeProcessedData = fullSizeProcessedData;
+
+        // Process preview image for display
+        const previewProcessedData = this.processImage(this.originalImageData, options);
+        this.displayProcessedImage(previewProcessedData);
     }
 
     applyDithering() {
@@ -397,14 +414,21 @@ class ImageDitheringTool {
     }
 
     downloadImage() {
-        if (!this.outputCanvas) {
+        if (!this.fullSizeProcessedData) {
             this.showError('No processed image to download.');
             return;
         }
 
+        // Create a temporary canvas for the full-size image
+        const tempCanvas = document.createElement('canvas');
+        const tempCtx = tempCanvas.getContext('2d');
+        tempCanvas.width = this.fullSizeProcessedData.width;
+        tempCanvas.height = this.fullSizeProcessedData.height;
+        tempCtx.putImageData(this.fullSizeProcessedData, 0, 0);
+
         const link = document.createElement('a');
         link.download = 'dithered-image.png';
-        link.href = this.outputCanvas.toDataURL();
+        link.href = tempCanvas.toDataURL();
         link.click();
     }
 
@@ -412,6 +436,9 @@ class ImageDitheringTool {
         if (this.currentImage) {
             this.displayOriginalImage(this.currentImage);
         }
+        
+        // Clear full-size processed data
+        this.fullSizeProcessedData = null;
         
         // Reset controls
         document.getElementById('contrast-slider').value = 1.0;
