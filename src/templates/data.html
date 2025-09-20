@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="tools-container">
+    <div class="tools-header">
+        <h1>Public Datasets</h1>
+        <p>Open datasets I've created and maintain for research, analysis, and public use. All data is freely available and regularly updated.</p>
+    </div>
+
+    <!-- Economics & Finance -->
+    <div class="tool-category">
+        <h2>Economics & Finance</h2>
+        <div class="tool-grid">
+            <a href="https://github.com/vtasca/fed-statement-scraping" class="tool-card-link" target="_blank" rel="noopener noreferrer">
+                <div class="tool-card">
+                    <h3>FOMC Meeting Statements & Minutes</h3>
+                    <p>Automatically scraped Federal Reserve FOMC meeting statements and minutes since 2000. Tracks US monetary policy changes through time with weekly updates.</p>
+                    <div class="data-meta">
+                        <span class="data-field"><i class="fas fa-calendar"></i> Since 2000</span>
+                        <span class="data-field"><i class="fas fa-sync"></i> Weekly updates</span>
+                        <span class="data-field"><i class="fas fa-database"></i> CSV format</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Web Analytics -->
+    <div class="tool-category">
+        <h2>Web Analytics</h2>
+        <div class="tool-grid">
+            <a href="https://github.com/vtasca/wikipedia-pageviews" class="tool-card-link" target="_blank" rel="noopener noreferrer">
+                <div class="tool-card">
+                    <h3>Wikipedia Article Pageviews</h3>
+                    <p>Daily aggregation of the 100 most popular Wikipedia articles by pageviews since 2016. Enables tracking trending topics and public interest patterns.</p>
+                    <div class="data-meta">
+                        <span class="data-field"><i class="fas fa-calendar"></i> Since 2016</span>
+                        <span class="data-field"><i class="fas fa-sync"></i> Daily updates</span>
+                        <span class="data-field"><i class="fas fa-database"></i> CSV format</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Coming Soon -->
+    <div class="tool-category">
+        <h2>Coming Soon</h2>
+        <div class="tool-grid">
+            <div class="tool-card coming-soon">
+                <h3>Stock Market Sentiment</h3>
+                <p>Real-time sentiment analysis of financial news and social media. Track market mood and predict volatility patterns.</p>
+                <span class="btn btn-disabled">Coming Soon</span>
+            </div>
+            <div class="tool-card coming-soon">
+                <h3>Climate Data Aggregator</h3>
+                <p>Comprehensive climate datasets from multiple sources. Temperature, precipitation, and environmental indicators.</p>
+                <span class="btn btn-disabled">Coming Soon</span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

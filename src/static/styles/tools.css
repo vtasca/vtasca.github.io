@@ -646,6 +646,33 @@
     max-width: 600px;
 }
 
+/* Data Page Specific Styles */
+.data-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.data-field {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-color-secondary);
+    background: var(--bg-color);
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0;
+}
+
+.data-field i {
+    color: var(--accent-color);
+    font-size: 0.8rem;
+}
+
 /* Responsive design for tools */
 @media (max-width: 768px) {
     .tools-container {
@@ -703,5 +730,14 @@
     .btn {
         width: 100%;
         max-width: 200px;
+    }
+    
+    .data-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .data-field {
+        justify-content: center;
     }
 }
