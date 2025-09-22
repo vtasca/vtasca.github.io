@@ -7,12 +7,20 @@
 
 /* Intro section */
 .data-intro {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
     gap: 3rem;
-    margin-bottom: 4rem;
-    padding-bottom: 3rem;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
     border-bottom: 2px dotted var(--border-color);
+    align-items: center;
+}
+
+.data-intro-content {
+    flex: 1;
+}
+
+.data-intro-image {
+    flex: 1;
 }
 
 .data-intro-content h1 {
@@ -44,8 +52,9 @@
 
 /* Interactive code snippet */
 .code-snippet-container {
-    grid-column: 1 / -1;
-    margin-top: 2rem;
+    margin-bottom: 4rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px dotted var(--border-color);
 }
 
 .code-snippet {
@@ -124,8 +133,8 @@
 }
 
 .data-section-meta {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 1rem;
     margin-bottom: 1.5rem;
 }
@@ -137,10 +146,11 @@
 }
 
 .meta-label {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     color: var(--text-color-tertiary);
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    font-family: sans-serif;
 }
 
 .meta-value {
@@ -189,8 +199,16 @@
 /* Responsive design */
 @media (max-width: 768px) {
     .data-intro {
-        grid-template-columns: 1fr;
+        flex-direction: column;
         gap: 2rem;
+    }
+    
+    .data-intro-content {
+        flex: none;
+    }
+    
+    .data-intro-image {
+        flex: none;
     }
     
     .data-intro-content h1 {
@@ -203,7 +221,13 @@
     }
     
     .data-section-meta {
-        grid-template-columns: repeat(2, 1fr);
+        flex-direction: column;
+    }
+    
+    .meta-item {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
     }
     
     .platform-links {
@@ -212,8 +236,12 @@
 }
 
 @media (max-width: 480px) {
-    .data-section-meta {
-        grid-template-columns: 1fr;
+    .data-page {
+        padding: 1rem 0.5rem;
+    }
+    
+    .data-intro-content h1 {
+        font-size: 1.8rem;
     }
     
     .platform-links {

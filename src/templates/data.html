@@ -1,47 +1,35 @@
 {% extends "base.html" %}
 
+{% block head %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.css">
+{% endblock %}
+
 {% block content %}
 <div class="data-page">
     <!-- Intro Section -->
     <div class="data-intro">
         <div class="data-intro-content">
             <h1>Data Collections</h1>
-            <p>Curated datasets from various domains, regularly updated and freely available. Each collection includes comprehensive metadata, download options, and platform integrations.</p>
+            <p>Curated datasets from various domains, regularly updated and freely available. Each collection includes
+                comprehensive metadata, download options, and platform integrations.</p>
         </div>
         <div class="data-intro-image">
             <img src="/static/jardin-a-bordighera.jpg" alt="Data visualization" />
         </div>
-        
-        <!-- Interactive Code Snippet -->
-        <div class="code-snippet-container">
-            <div class="code-snippet">
-                <div class="code-snippet-header">
-                    <span class="code-snippet-title">Download Options</span>
-                    <button class="copy-button" onclick="copyToClipboard('data-snippet')">Copy</button>
-                </div>
-                <div class="code-snippet-content" id="data-snippet"># Python
-import pandas as pd
-import requests
+    </div>
 
-# Download FOMC statements
-url = "https://raw.githubusercontent.com/vtasca/fed-statement-scraping/main/data/fomc_statements.csv"
-df = pd.read_csv(url)
+    <!-- Interactive Code Snippet -->
+    <div class="code-snippet-container">
+        <pre><code class="language-python">import requests
 
-# Download Wikipedia pageviews
-url = "https://raw.githubusercontent.com/vtasca/wikipedia-pageviews/main/data/pageviews.csv"
-df = pd.read_csv(url)
+# Download a dataset
+url = """https://raw.githubusercontent.com/vtasca/
+fed-statement-scraping/main/data/fomc_statements.csv"""
 
-# R
-library(readr)
-library(dplyr)
-
-# Download FOMC statements
-fomc_data <- read_csv("https://raw.githubusercontent.com/vtasca/fed-statement-scraping/main/data/fomc_statements.csv")
-
-# Download Wikipedia pageviews
-pageviews_data <- read_csv("https://raw.githubusercontent.com/vtasca/wikipedia-pageviews/main/data/pageviews.csv")</div>
-            </div>
-        </div>
+response = requests.get(url)
+with open('fomc_statements.csv', 'wb') as f:
+    f.write(response.content)</code></pre>
     </div>
 
     <!-- FOMC Statements Section -->
@@ -49,7 +37,7 @@ pageviews_data <- read_csv("https://raw.githubusercontent.com/vtasca/wikipedia-p
         <div class="data-section-header">
             <h2 class="data-section-title">FOMC Meeting Statements & Minutes</h2>
         </div>
-        
+
         <div class="data-section-meta">
             <div class="meta-item">
                 <span class="meta-label">Data Size</span>
@@ -64,7 +52,7 @@ pageviews_data <- read_csv("https://raw.githubusercontent.com/vtasca/wikipedia-p
                 <span class="meta-value">1,247</span>
             </div>
             <div class="meta-item">
-                <span class="meta-label">Update Schedule</span>
+                <span class="meta-label">Updates</span>
                 <span class="meta-value">Weekly</span>
             </div>
             <div class="meta-item">
@@ -72,22 +60,34 @@ pageviews_data <- read_csv("https://raw.githubusercontent.com/vtasca/wikipedia-p
                 <span class="meta-value">Since 2000</span>
             </div>
         </div>
-        
+
         <div class="data-section-description">
-            Automatically scraped Federal Reserve FOMC meeting statements and minutes since 2000. Tracks US monetary policy changes through time with comprehensive metadata including meeting dates, statement types, and full text content. Updated weekly to capture the latest policy decisions and economic outlook.
+            Automatically scraped Federal Reserve FOMC meeting statements and minutes since 2000. Tracks US monetary
+            policy changes through time with comprehensive metadata including meeting dates, statement types, and full
+            text content. Updated weekly to capture the latest policy decisions and economic outlook.
         </div>
-        
+
         <div class="platform-links">
-            <a href="https://github.com/vtasca/fed-statement-scraping" class="platform-link" target="_blank" rel="noopener noreferrer">
-                <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            <a href="https://github.com/vtasca/fed-statement-scraping" class="platform-link" target="_blank"
+                rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                </svg>
                 GitHub
             </a>
             <a href="https://www.kaggle.com/datasets" class="platform-link" target="_blank" rel="noopener noreferrer">
-                <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.568 8.16c-.169 0-.333.034-.483.099v8.16c.15.065.314.099.483.099.828 0 1.5-.672 1.5-1.5V9.66c0-.828-.672-1.5-1.5-1.5zm-11.136 0c-.828 0-1.5.672-1.5 1.5v5.16c0 .828.672 1.5 1.5 1.5.169 0 .333-.034.483-.099V8.259c-.15-.065-.314-.099-.483-.099zM12 6.5c-.828 0-1.5.672-1.5 1.5v8c0 .828.672 1.5 1.5 1.5s1.5-.672 1.5-1.5v-8c0-.828-.672-1.5-1.5-1.5z"/></svg>
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.568 8.16c-.169 0-.333.034-.483.099v8.16c.15.065.314.099.483.099.828 0 1.5-.672 1.5-1.5V9.66c0-.828-.672-1.5-1.5-1.5zm-11.136 0c-.828 0-1.5.672-1.5 1.5v5.16c0 .828.672 1.5 1.5 1.5.169 0 .333-.034.483-.099V8.259c-.15-.065-.314-.099-.483-.099zM12 6.5c-.828 0-1.5.672-1.5 1.5v8c0 .828.672 1.5 1.5 1.5s1.5-.672 1.5-1.5v-8c0-.828-.672-1.5-1.5-1.5z" />
+                </svg>
                 Kaggle
             </a>
             <a href="https://huggingface.co/datasets" class="platform-link" target="_blank" rel="noopener noreferrer">
-                <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2.4c5.302 0 9.6 4.298 9.6 9.6S17.302 21.6 12 21.6 2.4 17.302 2.4 12 6.698 2.4 12 2.4zm0 1.2c-4.64 0-8.4 3.76-8.4 8.4s3.76 8.4 8.4 8.4 8.4-3.76 8.4-8.4-3.76-8.4-8.4-8.4z"/></svg>
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2.4c5.302 0 9.6 4.298 9.6 9.6S17.302 21.6 12 21.6 2.4 17.302 2.4 12 6.698 2.4 12 2.4zm0 1.2c-4.64 0-8.4 3.76-8.4 8.4s3.76 8.4 8.4 8.4 8.4-3.76 8.4-8.4-3.76-8.4-8.4-8.4z" />
+                </svg>
                 Hugging Face
             </a>
         </div>
@@ -98,7 +98,7 @@ pageviews_data <- read_csv("https://raw.githubusercontent.com/vtasca/wikipedia-p
         <div class="data-section-header">
             <h2 class="data-section-title">Wikipedia Article Pageviews</h2>
         </div>
-        
+
         <div class="data-section-meta">
             <div class="meta-item">
                 <span class="meta-label">Data Size</span>
@@ -113,7 +113,7 @@ pageviews_data <- read_csv("https://raw.githubusercontent.com/vtasca/wikipedia-p
                 <span class="meta-value">45,892</span>
             </div>
             <div class="meta-item">
-                <span class="meta-label">Update Schedule</span>
+                <span class="meta-label">Updates</span>
                 <span class="meta-value">Daily</span>
             </div>
             <div class="meta-item">
@@ -121,46 +121,46 @@ pageviews_data <- read_csv("https://raw.githubusercontent.com/vtasca/wikipedia-p
                 <span class="meta-value">Since 2016</span>
             </div>
         </div>
-        
+
         <div class="data-section-description">
-            Daily aggregation of the 100 most popular Wikipedia articles by pageviews since 2016. Enables tracking trending topics and public interest patterns over time. Includes article titles, pageview counts, dates, and language information for comprehensive analysis of web traffic patterns.
+            Daily aggregation of the 100 most popular Wikipedia articles by pageviews since 2016. Enables tracking
+            trending topics and public interest patterns over time. Includes article titles, pageview counts, dates, and
+            language information for comprehensive analysis of web traffic patterns.
         </div>
-        
+
         <div class="platform-links">
-            <a href="https://github.com/vtasca/wikipedia-pageviews" class="platform-link" target="_blank" rel="noopener noreferrer">
-                <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            <a href="https://github.com/vtasca/wikipedia-pageviews" class="platform-link" target="_blank"
+                rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                </svg>
                 GitHub
             </a>
             <a href="https://www.kaggle.com/datasets" class="platform-link" target="_blank" rel="noopener noreferrer">
-                <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.568 8.16c-.169 0-.333.034-.483.099v8.16c.15.065.314.099.483.099.828 0 1.5-.672 1.5-1.5V9.66c0-.828-.672-1.5-1.5-1.5zm-11.136 0c-.828 0-1.5.672-1.5 1.5v5.16c0 .828.672 1.5 1.5 1.5.169 0 .333-.034.483-.099V8.259c-.15-.065-.314-.099-.483-.099zM12 6.5c-.828 0-1.5.672-1.5 1.5v8c0 .828.672 1.5 1.5 1.5s1.5-.672 1.5-1.5v-8c0-.828-.672-1.5-1.5-1.5z"/></svg>
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.568 8.16c-.169 0-.333.034-.483.099v8.16c.15.065.314.099.483.099.828 0 1.5-.672 1.5-1.5V9.66c0-.828-.672-1.5-1.5-1.5zm-11.136 0c-.828 0-1.5.672-1.5 1.5v5.16c0 .828.672 1.5 1.5 1.5.169 0 .333-.034.483-.099V8.259c-.15-.065-.314-.099-.483-.099zM12 6.5c-.828 0-1.5.672-1.5 1.5v8c0 .828.672 1.5 1.5 1.5s1.5-.672 1.5-1.5v-8c0-.828-.672-1.5-1.5-1.5z" />
+                </svg>
                 Kaggle
             </a>
             <a href="https://huggingface.co/datasets" class="platform-link" target="_blank" rel="noopener noreferrer">
-                <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2.4c5.302 0 9.6 4.298 9.6 9.6S17.302 21.6 12 21.6 2.4 17.302 2.4 12 6.698 2.4 12 2.4zm0 1.2c-4.64 0-8.4 3.76-8.4 8.4s3.76 8.4 8.4 8.4 8.4-3.76 8.4-8.4-3.76-8.4-8.4-8.4z"/></svg>
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2.4c5.302 0 9.6 4.298 9.6 9.6S17.302 21.6 12 21.6 2.4 17.302 2.4 12 6.698 2.4 12 2.4zm0 1.2c-4.64 0-8.4 3.76-8.4 8.4s3.76 8.4 8.4 8.4 8.4-3.76 8.4-8.4-3.76-8.4-8.4-8.4z" />
+                </svg>
                 Hugging Face
             </a>
         </div>
     </div>
 </div>
+{% endblock %}
 
-<script>
-function copyToClipboard(elementId) {
-    const element = document.getElementById(elementId);
-    const text = element.textContent;
-    
-    navigator.clipboard.writeText(text).then(function() {
-        const button = document.querySelector('.copy-button');
-        const originalText = button.textContent;
-        button.textContent = 'Copied!';
-        button.classList.add('copied');
-        
-        setTimeout(function() {
-            button.textContent = originalText;
-            button.classList.remove('copied');
-        }, 2000);
-    }).catch(function(err) {
-        console.error('Could not copy text: ', err);
-    });
-}
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.js"></script>
+<script>    
+    hljs.highlightAll();
+    hljs.addPlugin(new CopyButtonPlugin());
 </script>
 {% endblock %}
