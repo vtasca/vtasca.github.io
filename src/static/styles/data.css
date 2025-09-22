@@ -11,7 +11,6 @@
     gap: 3rem;
     margin-bottom: 2rem;
     padding-bottom: 2rem;
-    border-bottom: 2px dotted var(--border-color);
     align-items: center;
 }
 
@@ -46,7 +45,6 @@
 .data-intro-image img {
     max-width: 100%;
     height: auto;
-    border: 2px dotted var(--border-color);
     padding: 1rem;
 }
 
@@ -190,10 +188,18 @@
     border-color: var(--text-color);
 }
 
-.platform-link svg {
+.platform-link i {
+    font-size: 1.2rem;
+    color: currentColor;
+}
+
+.platform-link img {
     width: 16px;
     height: 16px;
-    fill: currentColor;
+}
+
+.platform-link:hover img {
+    filter: brightness(1.2);
 }
 
 /* Responsive design */
@@ -228,6 +234,7 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
+        border-bottom: 1px dotted var(--border-color);
     }
     
     .platform-links {
