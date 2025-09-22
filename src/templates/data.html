@@ -1,110 +1,166 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="data-container">
-    <div class="data-header">
-        <h1>Data Catalog</h1>
-        <p>Curated datasets for research and analysis. All data is freely available and regularly updated.</p>
-    </div>
+<div class="data-page">
+    <!-- Intro Section -->
+    <div class="data-intro">
+        <div class="data-intro-content">
+            <h1>Data Collections</h1>
+            <p>Curated datasets from various domains, regularly updated and freely available. Each collection includes comprehensive metadata, download options, and platform integrations.</p>
+        </div>
+        <div class="data-intro-image">
+            <img src="/static/jardin-a-bordighera.jpg" alt="Data visualization" />
+        </div>
+        
+        <!-- Interactive Code Snippet -->
+        <div class="code-snippet-container">
+            <div class="code-snippet">
+                <div class="code-snippet-header">
+                    <span class="code-snippet-title">Download Options</span>
+                    <button class="copy-button" onclick="copyToClipboard('data-snippet')">Copy</button>
+                </div>
+                <div class="code-snippet-content" id="data-snippet"># Python
+import pandas as pd
+import requests
 
-    <div class="data-grid">
-        <!-- FOMC Data Card -->
-        <div class="data-card">
-            <div class="data-card-header">
-                <div class="data-card-title">
-                    <h2>FOMC Meeting Statements & Minutes</h2>
-                    <div class="data-card-subtitle">Federal Reserve Monetary Policy Data</div>
-                </div>
-                <div class="data-card-badge">ECONOMICS</div>
-            </div>
-            
-            <div class="data-card-body">
-                <div class="data-description">
-                    <p>Automatically scraped Federal Reserve FOMC meeting statements and minutes since 2000. Tracks US monetary policy changes through time with weekly updates.</p>
-                </div>
-                
-                <div class="data-specifications">
-                    <div class="spec-row">
-                        <span class="spec-label">Coverage Period</span>
-                        <span class="spec-value">2000 - Present</span>
-                    </div>
-                    <div class="spec-row">
-                        <span class="spec-label">Update Frequency</span>
-                        <span class="spec-value">Weekly</span>
-                    </div>
-                    <div class="spec-row">
-                        <span class="spec-label">Format</span>
-                        <span class="spec-value">CSV</span>
-                    </div>
-                    <div class="spec-row">
-                        <span class="spec-label">Records</span>
-                        <span class="spec-value">~500+</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="data-card-footer">
-                <div class="data-card-meta">
-                    <span class="batch-number">Batch: FED-2024-001</span>
-                    <span class="last-updated">Updated: Weekly</span>
-                </div>
-                <a href="https://github.com/vtasca/fed-statement-scraping" class="data-card-link" target="_blank" rel="noopener noreferrer">
-                    <span>Access Dataset</span>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M7 17L17 7M17 7H7M17 7V17"/>
-                    </svg>
-                </a>
+# Download FOMC statements
+url = "https://raw.githubusercontent.com/vtasca/fed-statement-scraping/main/data/fomc_statements.csv"
+df = pd.read_csv(url)
+
+# Download Wikipedia pageviews
+url = "https://raw.githubusercontent.com/vtasca/wikipedia-pageviews/main/data/pageviews.csv"
+df = pd.read_csv(url)
+
+# R
+library(readr)
+library(dplyr)
+
+# Download FOMC statements
+fomc_data <- read_csv("https://raw.githubusercontent.com/vtasca/fed-statement-scraping/main/data/fomc_statements.csv")
+
+# Download Wikipedia pageviews
+pageviews_data <- read_csv("https://raw.githubusercontent.com/vtasca/wikipedia-pageviews/main/data/pageviews.csv")</div>
             </div>
         </div>
+    </div>
 
-        <!-- Wikipedia Data Card -->
-        <div class="data-card">
-            <div class="data-card-header">
-                <div class="data-card-title">
-                    <h2>Wikipedia Article Pageviews</h2>
-                    <div class="data-card-subtitle">Public Interest Analytics</div>
-                </div>
-                <div class="data-card-badge">ANALYTICS</div>
+    <!-- FOMC Statements Section -->
+    <div class="data-section">
+        <div class="data-section-header">
+            <h2 class="data-section-title">FOMC Meeting Statements & Minutes</h2>
+        </div>
+        
+        <div class="data-section-meta">
+            <div class="meta-item">
+                <span class="meta-label">Data Size</span>
+                <span class="meta-value">2.3 MB</span>
             </div>
-            
-            <div class="data-card-body">
-                <div class="data-description">
-                    <p>Daily aggregation of the 100 most popular Wikipedia articles by pageviews since 2016. Enables tracking trending topics and public interest patterns.</p>
-                </div>
-                
-                <div class="data-specifications">
-                    <div class="spec-row">
-                        <span class="spec-label">Coverage Period</span>
-                        <span class="spec-value">2016 - Present</span>
-                    </div>
-                    <div class="spec-row">
-                        <span class="spec-label">Update Frequency</span>
-                        <span class="spec-value">Daily</span>
-                    </div>
-                    <div class="spec-row">
-                        <span class="spec-label">Format</span>
-                        <span class="spec-value">CSV</span>
-                    </div>
-                    <div class="spec-row">
-                        <span class="spec-label">Records</span>
-                        <span class="spec-value">~3,000+</span>
-                    </div>
-                </div>
+            <div class="meta-item">
+                <span class="meta-label">Type</span>
+                <span class="meta-value">CSV</span>
             </div>
-            
-            <div class="data-card-footer">
-                <div class="data-card-meta">
-                    <span class="batch-number">Batch: WIKI-2024-001</span>
-                    <span class="last-updated">Updated: Daily</span>
-                </div>
-                <a href="https://github.com/vtasca/wikipedia-pageviews" class="data-card-link" target="_blank" rel="noopener noreferrer">
-                    <span>Access Dataset</span>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M7 17L17 7M17 7H7M17 7V17"/>
-                    </svg>
-                </a>
+            <div class="meta-item">
+                <span class="meta-label">Rows</span>
+                <span class="meta-value">1,247</span>
             </div>
+            <div class="meta-item">
+                <span class="meta-label">Update Schedule</span>
+                <span class="meta-value">Weekly</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">History</span>
+                <span class="meta-value">Since 2000</span>
+            </div>
+        </div>
+        
+        <div class="data-section-description">
+            Automatically scraped Federal Reserve FOMC meeting statements and minutes since 2000. Tracks US monetary policy changes through time with comprehensive metadata including meeting dates, statement types, and full text content. Updated weekly to capture the latest policy decisions and economic outlook.
+        </div>
+        
+        <div class="platform-links">
+            <a href="https://github.com/vtasca/fed-statement-scraping" class="platform-link" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+            </a>
+            <a href="https://www.kaggle.com/datasets" class="platform-link" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.568 8.16c-.169 0-.333.034-.483.099v8.16c.15.065.314.099.483.099.828 0 1.5-.672 1.5-1.5V9.66c0-.828-.672-1.5-1.5-1.5zm-11.136 0c-.828 0-1.5.672-1.5 1.5v5.16c0 .828.672 1.5 1.5 1.5.169 0 .333-.034.483-.099V8.259c-.15-.065-.314-.099-.483-.099zM12 6.5c-.828 0-1.5.672-1.5 1.5v8c0 .828.672 1.5 1.5 1.5s1.5-.672 1.5-1.5v-8c0-.828-.672-1.5-1.5-1.5z"/></svg>
+                Kaggle
+            </a>
+            <a href="https://huggingface.co/datasets" class="platform-link" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2.4c5.302 0 9.6 4.298 9.6 9.6S17.302 21.6 12 21.6 2.4 17.302 2.4 12 6.698 2.4 12 2.4zm0 1.2c-4.64 0-8.4 3.76-8.4 8.4s3.76 8.4 8.4 8.4 8.4-3.76 8.4-8.4-3.76-8.4-8.4-8.4z"/></svg>
+                Hugging Face
+            </a>
+        </div>
+    </div>
+
+    <!-- Wikipedia Pageviews Section -->
+    <div class="data-section">
+        <div class="data-section-header">
+            <h2 class="data-section-title">Wikipedia Article Pageviews</h2>
+        </div>
+        
+        <div class="data-section-meta">
+            <div class="meta-item">
+                <span class="meta-label">Data Size</span>
+                <span class="meta-value">15.7 MB</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Type</span>
+                <span class="meta-value">CSV</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Rows</span>
+                <span class="meta-value">45,892</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Update Schedule</span>
+                <span class="meta-value">Daily</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">History</span>
+                <span class="meta-value">Since 2016</span>
+            </div>
+        </div>
+        
+        <div class="data-section-description">
+            Daily aggregation of the 100 most popular Wikipedia articles by pageviews since 2016. Enables tracking trending topics and public interest patterns over time. Includes article titles, pageview counts, dates, and language information for comprehensive analysis of web traffic patterns.
+        </div>
+        
+        <div class="platform-links">
+            <a href="https://github.com/vtasca/wikipedia-pageviews" class="platform-link" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+            </a>
+            <a href="https://www.kaggle.com/datasets" class="platform-link" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.568 8.16c-.169 0-.333.034-.483.099v8.16c.15.065.314.099.483.099.828 0 1.5-.672 1.5-1.5V9.66c0-.828-.672-1.5-1.5-1.5zm-11.136 0c-.828 0-1.5.672-1.5 1.5v5.16c0 .828.672 1.5 1.5 1.5.169 0 .333-.034.483-.099V8.259c-.15-.065-.314-.099-.483-.099zM12 6.5c-.828 0-1.5.672-1.5 1.5v8c0 .828.672 1.5 1.5 1.5s1.5-.672 1.5-1.5v-8c0-.828-.672-1.5-1.5-1.5z"/></svg>
+                Kaggle
+            </a>
+            <a href="https://huggingface.co/datasets" class="platform-link" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2.4c5.302 0 9.6 4.298 9.6 9.6S17.302 21.6 12 21.6 2.4 17.302 2.4 12 6.698 2.4 12 2.4zm0 1.2c-4.64 0-8.4 3.76-8.4 8.4s3.76 8.4 8.4 8.4 8.4-3.76 8.4-8.4-3.76-8.4-8.4-8.4z"/></svg>
+                Hugging Face
+            </a>
         </div>
     </div>
 </div>
+
+<script>
+function copyToClipboard(elementId) {
+    const element = document.getElementById(elementId);
+    const text = element.textContent;
+    
+    navigator.clipboard.writeText(text).then(function() {
+        const button = document.querySelector('.copy-button');
+        const originalText = button.textContent;
+        button.textContent = 'Copied!';
+        button.classList.add('copied');
+        
+        setTimeout(function() {
+            button.textContent = originalText;
+            button.classList.remove('copied');
+        }, 2000);
+    }).catch(function(err) {
+        console.error('Could not copy text: ', err);
+    });
+}
+</script>
 {% endblock %}
