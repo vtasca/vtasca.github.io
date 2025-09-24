@@ -50,7 +50,7 @@
 
 /* Interactive code snippet */
 .code-snippet-container {
-    margin-bottom: 4rem;
+    margin-top: 1.5rem;
     padding-bottom: 2rem;
     border-bottom: 2px dotted var(--border-color);
 }
@@ -79,26 +79,6 @@
     color: var(--text-color);
 }
 
-.copy-button {
-    background: var(--button-bg);
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 0;
-    cursor: pointer;
-    font-size: 0.8rem;
-    transition: background-color 0.2s ease;
-}
-
-.copy-button:hover {
-    background: var(--button-hover-bg);
-}
-
-.copy-button.copied {
-    background: var(--success-bg);
-    color: var(--success-color);
-}
-
 .code-snippet-content {
     color: var(--text-color);
     white-space: pre-wrap;
@@ -109,7 +89,11 @@
 .data-section {
     margin-bottom: 3rem;
     padding: 2rem 0;
-    border-bottom: 1px dotted var(--border-color);
+}
+
+.data-section:first-of-type {
+    border-top: 2px dotted var(--border-color);
+    padding-top: 2rem;
 }
 
 .data-section:last-child {
@@ -128,6 +112,7 @@
     font-weight: normal;
     margin: 0;
     letter-spacing: 0.3px;
+    font-family: monospace;
 }
 
 .data-section-meta {

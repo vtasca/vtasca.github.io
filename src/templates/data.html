@@ -19,19 +19,6 @@
         </div>
     </div>
 
-    <!-- Interactive Code Snippet -->
-    <div class="code-snippet-container">
-        <pre><code class="language-python">import requests
-
-# Download a dataset
-url = """https://raw.githubusercontent.com/vtasca/
-fed-statement-scraping/main/data/fomc_statements.csv"""
-
-response = requests.get(url)
-with open('fomc_statements.csv', 'wb') as f:
-    f.write(response.content)</code></pre>
-    </div>
-
     <!-- FOMC Statements Section -->
     <div class="data-section">
         <div class="data-section-header">
@@ -81,11 +68,13 @@ with open('fomc_statements.csv', 'wb') as f:
                 <img src="/static/hf-logo-bw.svg" alt="Hugging Face">
                 Hugging Face
             </a>
-            <a href="#" class="platform-link">
-                <i class="fa-solid fa-copy"></i>
-                Copy to clipboard
-            </a>
         </div>
+
+        <div class="code-snippet-container">
+            <pre><code class="language-bash"># Download the dataset
+curl -o fomc_statements.csv https://raw.githubusercontent.com/vtasca/fed-statement-scraping/main/data/fomc_statements.csv</code></pre>
+        </div>
+
     </div>
 
     <!-- Wikipedia Pageviews Section -->
@@ -137,12 +126,12 @@ with open('fomc_statements.csv', 'wb') as f:
                 <img src="/static/hf-logo-bw.svg" alt="Hugging Face" style="width: 16px; height: 16px;">
                 Hugging Face
             </a>
-            <a href="#" class="platform-link">
-                <i class="fa-solid fa-copy"></i>
-                Copy to clipboard
-            </a>
         </div>
-    </div>
+        <div class="code-snippet-container">
+            <pre><code class="language-bash"># Download the dataset
+curl -o pageviews.csv https://raw.githubusercontent.com/vtasca/wikipedia-pageviews/main/data/pageviews.csv</code></pre>
+        </div>
+    </div>    
 </div>
 {% endblock %}
 
