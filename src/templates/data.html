@@ -10,134 +10,71 @@
     <!-- Intro Section -->
     <div class="data-intro">
         <div class="data-intro-content">
-            <h1>Data Collections</h1>
-            <p>Curated datasets from various domains, regularly updated and freely available. Each collection includes
-                comprehensive metadata, download options, and platform integrations.</p>
+            <h1>Data Collection</h1>
+            <p>Curated datasets from various domains, regularly updated and freely available. Each set includes metadata, download options, and mirror links for major platforms.</p>
         </div>
         <div class="data-intro-image">
-            <img src="/static/la-corniche-near-monaco.jpg" alt="La Corniche near Monaco. Claude Monet, 1884" />
+            <img src="{{ static_prefix }}/la-corniche-near-monaco-detail-2.png" alt="La Corniche near Monaco. Claude Monet, 1884" />
         </div>
     </div>
 
-    <!-- FOMC Statements Section -->
+    {% for dataset in datasets %}
     <div class="data-section">
         <div class="data-section-header">
-            <h2 class="data-section-title">FOMC Meeting Statements & Minutes</h2>
+            <h2 class="data-section-title">{{ dataset.title }}</h2>
         </div>
         <div class="data-section-badge">
-            <img src="https://github.com/vtasca/fed-statement-scraping/actions/workflows/main.yml/badge.svg" alt="GitHub Actions" />
+            <img src="{{ dataset.badge_url }}" alt="GitHub Actions" />
         </div>
 
         <div class="data-section-meta">
             <div class="meta-item">
                 <span class="meta-label">Size</span>
-                <span class="meta-value" id="fomc-data-size">Loading...</span>
+                <span class="meta-value" id="{{ dataset.id }}-data-size">Loading...</span>
             </div>
             <div class="meta-item">
                 <span class="meta-label">Type</span>
-                <span class="meta-value">CSV</span>
+                <span class="meta-value">{{ dataset.type }}</span>
             </div>
             <div class="meta-item">
                 <span class="meta-label">Rows</span>
-                <span class="meta-value" id="fomc-rows">Loading...</span>
+                <span class="meta-value" id="{{ dataset.id }}-rows">Loading...</span>
             </div>
             <div class="meta-item">
                 <span class="meta-label">Updates</span>
-                <span class="meta-value">Weekly</span>
+                <span class="meta-value">{{ dataset.updates }}</span>
             </div>
             <div class="meta-item">
                 <span class="meta-label">History</span>
-                <span class="meta-value">Since 2000</span>
+                <span class="meta-value">{{ dataset.history }}</span>
             </div>
         </div>
 
         <div class="data-section-description">
-            Automatically scraped Federal Reserve FOMC meeting statements and minutes since 2000. Tracks US monetary
-            policy changes through time with comprehensive metadata including meeting dates, statement types, and full
-            text content. Updated weekly to capture the latest policy decisions and economic outlook.
+            {{ dataset.description }}
         </div>
 
+        <p class="download-options">Download options</p>
+
         <div class="platform-links">
-            <a href="https://github.com/vtasca/fed-statement-scraping" class="platform-link" target="_blank"
-                rel="noopener noreferrer">
-                <i class="fab fa-github"></i>
-                GitHub
+            {% for platform in dataset.platforms %}
+            <a href="{{ platform.url }}" class="platform-link" target="_blank" rel="noopener noreferrer">
+                {% if platform.icon == "img" %}
+                <img src="{{ static_prefix }}{{ platform.icon_src }}" alt="{{ platform.name }}" style="width: 16px; height: 16px;">
+                {% else %}
+                <i class="{{ platform.icon }}"></i>
+                {% endif %}
+                {{ platform.name }}
             </a>
-            <a href="https://www.kaggle.com/datasets/vladtasca/fomc-meeting-statements-and-minutes" class="platform-link" target="_blank" rel="noopener noreferrer">
-                <i class="fab fa-kaggle"></i>
-                Kaggle
-            </a>
-            <a href="https://huggingface.co/datasets/vtasca/fomc-statements-minutes" class="platform-link" target="_blank" rel="noopener noreferrer">
-                <img src="/static/hf-logo-bw.svg" alt="Hugging Face">
-                Hugging Face
-            </a>
+            {% endfor %}
         </div>
 
         <div class="code-snippet-container">
-            <pre><code class="language-bash"># Download the dataset
-curl -o fomc_statements.csv https://raw.githubusercontent.com/vtasca/fed-statement-scraping/main/data/fomc_statements.csv</code></pre>
+            <pre><code class="language-bash"># Or simply use curl
+{{ dataset.download_command }}</code></pre>
         </div>
-
     </div>
-
-    <!-- Wikipedia Pageviews Section -->
-    <div class="data-section">
-        <div class="data-section-header">
-            <h2 class="data-section-title">Wikipedia Article Pageviews</h2>
-        </div>
-        <div class="data-section-badge">
-            <img src="https://github.com/vtasca/wikipedia-pageviews/actions/workflows/main.yml/badge.svg" alt="GitHub Actions" />
-        </div>
-
-        <div class="data-section-meta">
-            <div class="meta-item">
-                <span class="meta-label">Size</span>
-                <span class="meta-value" id="wikipedia-data-size">Loading...</span>
-            </div>
-            <div class="meta-item">
-                <span class="meta-label">Type</span>
-                <span class="meta-value">CSV</span>
-            </div>
-            <div class="meta-item">
-                <span class="meta-label">Rows</span>
-                <span class="meta-value" id="wikipedia-rows">Loading...</span>
-            </div>
-            <div class="meta-item">
-                <span class="meta-label">Updates</span>
-                <span class="meta-value">Daily</span>
-            </div>
-            <div class="meta-item">
-                <span class="meta-label">History</span>
-                <span class="meta-value">Since 2016</span>
-            </div>
-        </div>
-
-        <div class="data-section-description">
-            Daily aggregation of the 100 most popular Wikipedia articles by pageviews since 2016. Enables tracking
-            trending topics and public interest patterns over time. Includes article titles, pageview counts, dates, and
-            language information for comprehensive analysis of web traffic patterns.
-        </div>
-
-        <div class="platform-links">
-            <a href="https://github.com/vtasca/wikipedia-pageviews" class="platform-link" target="_blank"
-                rel="noopener noreferrer">
-                <i class="fab fa-github"></i>
-                GitHub
-            </a>
-            <a href="https://www.kaggle.com/datasets/vladtasca/wikipedia-pageviews" class="platform-link" target="_blank" rel="noopener noreferrer">
-                <i class="fab fa-kaggle"></i>
-                Kaggle
-            </a>
-            <a href="https://huggingface.co/datasets/vtasca/wikipedia-pageviews" class="platform-link" target="_blank" rel="noopener noreferrer">
-                <img src="/static/hf-logo-bw.svg" alt="Hugging Face" style="width: 16px; height: 16px;">
-                Hugging Face
-            </a>
-        </div>
-        <div class="code-snippet-container">
-            <pre><code class="language-bash"># Download the dataset
-curl -o pageviews.csv https://raw.githubusercontent.com/vtasca/wikipedia-pageviews/main/data/pageviews.csv</code></pre>
-        </div>
-    </div>    
+    {% endfor %}    
 </div>
 {% endblock %}
 
@@ -196,23 +133,17 @@ curl -o pageviews.csv https://raw.githubusercontent.com/vtasca/wikipedia-pagevie
     
     // Function to fetch all dataset information
     async function fetchAllDatasetInfo() {
-        // Fetch FOMC dataset info
-        await fetchDatasetInfo(
-            'fomc-statements-minutes',
-            'fomc-rows',
-            'fomc-data-size',
-            '1,247',
-            '2.3 MB'
-        );
+        const datasets = {{ datasets | tojson }};
         
-        // Fetch Wikipedia dataset info
-        await fetchDatasetInfo(
-            'wikipedia-pageviews',
-            'wikipedia-rows',
-            'wikipedia-data-size',
-            '45,892',
-            '15.7 MB'
-        );
+        for (const dataset of datasets) {
+            await fetchDatasetInfo(
+                dataset.huggingface_dataset_name,
+                `${dataset.id}-rows`,
+                `${dataset.id}-data-size`,
+                dataset.fallback_rows,
+                dataset.fallback_size
+            );
+        }
     }
     
     // Fetch all dataset info when the page loads

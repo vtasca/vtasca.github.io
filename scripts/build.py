@@ -198,16 +198,21 @@ def generate_tools(publish_dir):
         f.write(html)
 
 
-def generate_data(publish_dir):
+def generate_data(publish_dir, src_dir):
     """Generate the data page"""
     env = setup_jinja()
     template = env.get_template("data.html")
 
+    # Load dataset metadata
+    with open(src_dir / "data_metadata.json", "r") as f:
+        datasets = json.load(f)
+
     html = template.render(
-        title="Data",
-        description="Open datasets for research, analysis, and public use",
+        title="Data Collection",
+        description="Curated datasets from various domains, regularly updated and freely available. Each set includes metadata, download options, and mirror links for major platforms.",
         static_prefix="static",
         root_prefix=".",
+        datasets=datasets,
     )
 
     with open(publish_dir / "data.html", "w", encoding="utf-8") as f:
@@ -300,6 +305,6 @@ if __name__ == "__main__":
     generate_rss_feed(blog_posts, publish_dir)
     generate_contact(publish_dir)
     generate_tools(publish_dir)
-    generate_data(publish_dir)
+    generate_data(publish_dir, src_dir)
     generate_tool_pages(publish_dir)
     generate_sitemap(publish_dir, src_dir, blog_posts)

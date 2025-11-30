@@ -8,6 +8,7 @@
 /* Intro section */
 .data-intro {
     display: flex;
+    flex-direction: column-reverse;
     gap: 3rem;
     margin-bottom: 2rem;
     padding-bottom: 2rem;
@@ -16,6 +17,7 @@
 
 .data-intro-content {
     flex: 1;
+    border-bottom: 1px solid var(--border-color)
 }
 
 .data-intro-image {
@@ -153,6 +155,15 @@
     margin-bottom: 2rem;
 }
 
+.download-options {
+    font-size: 0.7rem;
+    color: var(--text-color-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: sans-serif;
+    margin-bottom: 1rem;
+}
+
 /* Platform links */
 .platform-links {
     display: flex;
@@ -194,7 +205,6 @@
 /* Responsive design */
 @media (max-width: 768px) {
     .data-intro {
-        flex-direction: column;
         gap: 2rem;
     }
     
@@ -248,4 +258,8 @@
     .platform-link {
         justify-content: center;
     }
+}
+
+.data-page .data-section:last-of-type .code-snippet-container{
+    border-bottom: none;
 }

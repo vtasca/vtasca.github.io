@@ -1,0 +1,64 @@
+[
+  {
+    "id": "fomc",
+    "title": "FOMC Meeting Statements & Minutes",
+    "badge_url": "https://github.com/vtasca/fed-statement-scraping/actions/workflows/main.yml/badge.svg",
+    "type": "CSV",
+    "updates": "Weekly",
+    "history": "Since 2000",
+    "description": "Automatically scraped Federal Reserve FOMC meeting statements and minutes since 2000. Tracks US monetary policy changes through time with comprehensive metadata including meeting dates, statement types, and full text content. Updated weekly to capture the latest policy decisions and economic outlook.",
+    "platforms": [
+      {
+        "name": "GitHub",
+        "url": "https://github.com/vtasca/fed-statement-scraping",
+        "icon": "fab fa-github"
+      },
+      {
+        "name": "Kaggle",
+        "url": "https://www.kaggle.com/datasets/vladtasca/fomc-meeting-statements-and-minutes",
+        "icon": "fab fa-kaggle"
+      },
+      {
+        "name": "Hugging Face",
+        "url": "https://huggingface.co/datasets/vtasca/fomc-statements-minutes",
+        "icon": "img",
+        "icon_src": "/hf-logo-bw.svg"
+      }
+    ],
+    "download_command": "curl -o fomc_statements.csv https://raw.githubusercontent.com/vtasca/fed-statement-scraping/main/data/fomc_statements.csv",
+    "huggingface_dataset_name": "fomc-statements-minutes",
+    "fallback_rows": "1,247",
+    "fallback_size": "2.3 MB"
+  },
+  {
+    "id": "wikipedia",
+    "title": "Wikipedia Article Pageviews",
+    "badge_url": "https://github.com/vtasca/wikipedia-pageviews/actions/workflows/main.yml/badge.svg",
+    "type": "CSV",
+    "updates": "Daily",
+    "history": "Since 2016",
+    "description": "Daily aggregation of the 100 most popular Wikipedia articles by pageviews since 2016. Enables tracking trending topics and public interest patterns over time. Includes article titles, pageview counts, dates, and language information for comprehensive analysis of informed web search intent.",
+    "platforms": [
+      {
+        "name": "GitHub",
+        "url": "https://github.com/vtasca/wikipedia-pageviews",
+        "icon": "fab fa-github"
+      },
+      {
+        "name": "Kaggle",
+        "url": "https://www.kaggle.com/datasets/vladtasca/wikipedia-pageviews",
+        "icon": "fab fa-kaggle"
+      },
+      {
+        "name": "Hugging Face",
+        "url": "https://huggingface.co/datasets/vtasca/wikipedia-pageviews",
+        "icon": "img",
+        "icon_src": "/hf-logo-bw.svg"
+      }
+    ],
+    "download_command": "curl -o pageviews.csv https://raw.githubusercontent.com/vtasca/wikipedia-pageviews/main/data/pageviews.csv",
+    "huggingface_dataset_name": "wikipedia-pageviews",
+    "fallback_rows": "45,892",
+    "fallback_size": "15.7 MB"
+  }
+]
