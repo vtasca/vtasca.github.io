@@ -118,7 +118,7 @@ def generate_blog_index(blog_posts, publish_dir, src_dir):
     # Render template
     html = template.render(
         title="Blog",
-        description="Hot takes, sorted chronologically",
+        description="Controverisal takes, tagged and sorted chronologically",
         posts=sorted_posts,
         static_prefix="../static",
         root_prefix="..",
@@ -138,8 +138,8 @@ def generate_home(publish_dir):
     env.globals["is_homepage"] = True
 
     html = template.render(
-        title="vtasca.dev",
-        description="Hot takes, ordered chronologically",
+        title="Home",
+        description="A digital garden for experiments, thoughts, data and other such mischief.",
         static_prefix="static",
         root_prefix=".",
     )
