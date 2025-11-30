@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block head %}
+<style>
+    .site-header,
+    .site-footer,
+    .mobile-menu {
+        display: none !important;
+    }
+
+    body {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        min-height: 100vh !important;
+        max-width: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        height: 100vh !important;
+    }
+
+    main {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 100% !important;
+        height: 100vh !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .logo-center {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .logo-center .ascii-logo {
+        font-size: 0.5rem;
+    }
+</style>
+<meta name="robots" content="noindex">
+
+{% endblock %}
+
+{% block content %}
+<div class="logo-center">
+    <pre class="ascii-logo">
+        __                             __         
+ _   __/ /_____ _______________ _ ____/ /__ _   __
+| | / / __/ __ `/ ___/ ___/ __ `// __  / _ \ | / /
+| |/ / /_/ /_/ (__  ) /__/ /_/ // /_/ /  __/ |/ / 
+|___/\__/\__,_/____/\___/\__,_(_)__,_/\___/|___/  
+    </pre>
+</div>
+{% endblock %}
+

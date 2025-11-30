@@ -250,6 +250,22 @@ def generate_tool_pages(publish_dir):
         f.write(dithering_html)
 
 
+def generate_logo_page(publish_dir):
+    """Generate a blank page with centered logo"""
+    env = setup_jinja()
+    template = env.get_template("logo.html")
+
+    html = template.render(
+        title="Logo",
+        description="",
+        static_prefix="static",
+        root_prefix=".",
+    )
+
+    with open(publish_dir / "logo.html", "w", encoding="utf-8") as f:
+        f.write(html)
+
+
 def generate_sitemap(publish_dir, src_dir, blog_posts):
     """Generate sitemap.xml"""
 
@@ -307,4 +323,5 @@ if __name__ == "__main__":
     generate_tools(publish_dir)
     generate_data(publish_dir, src_dir)
     generate_tool_pages(publish_dir)
+    generate_logo_page(publish_dir)
     generate_sitemap(publish_dir, src_dir, blog_posts)
