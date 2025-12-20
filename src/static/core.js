@@ -79,3 +79,61 @@ function setupMobileMenu() {
 }
 
 const cleanupMobileMenu = setupMobileMenu();
+
+function setupHeadingAnchors() {
+    const article = document.querySelector('article');
+    if (!article) return;
+
+    // Function to create a slug from text
+    function slugify(text) {
+        return text
+            .toLowerCase()
+            .trim()
+            .replace(/[^\w\s-]/g, '') // Remove special characters
+            .replace(/[\s_-]+/g, '-') // Replace spaces and underscores with hyphens
+            .replace(/^-+|-+$/g, ''); // Remove leading/trailing hyphens
+    }
+
+    // Find all headings (h2-h6) within the article
+    const headings = article.querySelectorAll('h2, h3, h4, h5, h6');
+    const usedIds = new Set();
+    
+    headings.forEach((heading) => {
+        // Skip if heading already has an ID
+        if (heading.id) {
+            usedIds.add(heading.id);
+            return;
+        }
+
+        // Generate ID from heading text
+        let id = slugify(heading.textContent);
+        if (!id) return;
+
+        // Handle duplicate IDs by appending a number
+        let baseId = id;
+        let counter = 1;
+        while (usedIds.has(id)) {
+            id = `${baseId}-${counter}`;
+            counter++;
+        }
+        usedIds.add(id);
+
+        // Set the ID on the heading
+        heading.id = id;
+
+        // Make heading clickable
+        heading.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.history.pushState(null, '', `#${id}`);
+            
+            // Scroll to heading with smooth behavior
+            heading.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    });
+
+    return function cleanup() {
+        // Cleanup would go here if needed
+    };
+}
+
+const cleanupHeadingAnchors = setupHeadingAnchors();

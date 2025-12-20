@@ -72,6 +72,46 @@ article h4 {
     line-height: 1.4;
 }
 
+/* Anchor links for headings */
+article h2[id],
+article h3[id],
+article h4[id],
+article h5[id],
+article h6[id] {
+    position: relative;
+    cursor: pointer;
+}
+
+article h2[id]::before,
+article h3[id]::before,
+article h4[id]::before,
+article h5[id]::before,
+article h6[id]::before {
+    content: '#';
+    position: absolute;
+    left: -1.8rem;
+    color: #666;
+    font-weight: normal;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+[data-theme="dark"] article h2[id]::before,
+[data-theme="dark"] article h3[id]::before,
+[data-theme="dark"] article h4[id]::before,
+[data-theme="dark"] article h5[id]::before,
+[data-theme="dark"] article h6[id]::before {
+    color: #888;
+}
+
+article h2[id]:hover::before,
+article h3[id]:hover::before,
+article h4[id]:hover::before,
+article h5[id]:hover::before,
+article h6[id]:hover::before {
+    opacity: 1;
+}
+
 article ul, article ol {
     margin: 1.5rem 0;
     padding-left: 2rem;
@@ -180,7 +220,7 @@ article tr:hover td {
 
 @media (max-width: 768px) {
     article {
-        padding: 1rem 0;
+        padding: 1rem 2rem;
     }
     
     article h1 {
