@@ -1,0 +1,153 @@
+/* Homepage styles */
+
+.home-hero {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.home-tagline {
+    font-size: 1.15rem;
+    color: var(--text-color-secondary);
+    line-height: 1.6;
+    margin: 0;
+    text-align: center;
+}
+
+.home-hero-image {
+    width: 100%;
+}
+
+.home-hero-image img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+}
+
+.home-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    margin-bottom: 3rem;
+}
+
+.home-section h2 {
+    font-size: 1.4rem;
+    font-weight: normal;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px dotted var(--border-color);
+}
+
+/* Blog post list on homepage */
+.home-post-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.home-post-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.home-post {
+    padding: 1.25rem;
+    border: 2px dotted var(--border-color);
+    transition: border-color 0.2s ease;
+}
+
+.home-post:hover {
+    border-color: var(--accent-color);
+}
+
+.home-post h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.2rem;
+    font-weight: normal;
+    color: var(--text-color);
+}
+
+.home-post-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--text-color-secondary);
+}
+
+.home-post p {
+    margin: 0;
+    color: var(--text-color-secondary);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* Two-column grid for tools + data */
+.home-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+/* Cards for tools and data */
+.home-card-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.home-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    padding: 1rem 1.25rem;
+    border: 2px dotted var(--border-color);
+    transition: border-color 0.2s ease;
+}
+
+.home-card:hover {
+    border-color: var(--accent-color);
+}
+
+.home-card h3 {
+    margin: 0 0 0.35rem 0;
+    font-size: 1.05rem;
+    font-weight: normal;
+    color: var(--text-color);
+}
+
+.home-card p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--text-color-secondary);
+    line-height: 1.4;
+}
+
+.home-view-all {
+    display: inline-block;
+    margin-top: 0.75rem;
+    font-size: 0.9rem;
+    color: var(--text-color-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.home-view-all:hover {
+    color: var(--text-color);
+}
+
+@media (max-width: 640px) {
+    .home-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .home-hero-image img {
+        max-height: 280px;
+    }
+}

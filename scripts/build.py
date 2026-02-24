@@ -131,7 +131,7 @@ def generate_blog_index(blog_posts, publish_dir, src_dir):
         f.write(html)
 
 
-def generate_home(publish_dir):
+def generate_home(publish_dir, blog_posts, datasets):
     """Generate the homepage"""
     env = setup_jinja()
     template = env.get_template("home.html")
@@ -139,11 +139,15 @@ def generate_home(publish_dir):
     # Set is_homepage to True for the homepage
     env.globals["is_homepage"] = True
 
+    sorted_posts = sorted(blog_posts, key=lambda x: x.get("created_time", ""), reverse=True)
+
     html = template.render(
         title="Home",
         description="A digital garden for experiments, thoughts, data and other such mischief.",
         static_prefix="static",
         root_prefix=".",
+        posts=sorted_posts,
+        datasets=datasets,
     )
 
     with open(publish_dir / "index.html", "w", encoding="utf-8") as f:
@@ -317,8 +321,12 @@ if __name__ == "__main__":
             output_dir=publish_dir / "blog",
         )
 
+    # Load dataset metadata
+    with open(src_dir / "data_metadata.json", "r") as f:
+        datasets = json.load(f)
+
     # Generate other pages
-    generate_home(publish_dir)
+    generate_home(publish_dir, blog_posts, datasets)
     generate_blog_index(blog_posts, publish_dir, src_dir)
     generate_rss_feed(blog_posts, publish_dir)
     generate_contact(publish_dir)
