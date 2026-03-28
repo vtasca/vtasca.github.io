@@ -24,7 +24,9 @@
             <h2 class="data-section-title">{{ dataset.title }}</h2>
         </div>
         <div class="data-section-badge">
-            <img src="{{ dataset.badge_url }}" alt="GitHub Actions" />
+            <a href="{{ dataset.platforms[0].url }}" target="_blank" rel="noopener noreferrer">
+                <img src="{{ dataset.badge_url }}" alt="GitHub Actions" />
+            </a>
         </div>
 
         <div class="data-section-meta">
@@ -81,7 +83,8 @@
 {% block scripts %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 <script src="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.js"></script>
-<script>    
+<script type="application/json" id="page-datasets-data">{{ datasets | tojson }}</script>
+<script>
     hljs.highlightAll();
     hljs.addPlugin(new CopyButtonPlugin());
     
@@ -133,8 +136,10 @@
     
     // Function to fetch all dataset information
     async function fetchAllDatasetInfo() {
-        const datasets = {{ datasets | tojson }};
-        
+        const datasets = JSON.parse(
+            document.getElementById('page-datasets-data').textContent
+        );
+
         for (const dataset of datasets) {
             await fetchDatasetInfo(
                 dataset.huggingface_dataset_name,
