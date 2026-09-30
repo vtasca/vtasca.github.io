@@ -211,7 +211,7 @@ wheels = [
 [[package]]
 name = "notion2md"
 version = "2.9.0"
-source = { git = "https://github.com/vtasca/notion2md-extended.git#d8bcbb17da64c5d63a70def147ddd981d75c1633" }
+source = { git = "https://github.com/vtasca/notion2md-extended.git#a482af0a189c9435b769f0077eb2a94e9845a1f6" }
 dependencies = [
     { name = "cleo" },
     { name = "notion-client" },
