@@ -32,7 +32,7 @@
         <div class="data-section-meta">
             <div class="meta-item">
                 <span class="meta-label">Size</span>
-                <span class="meta-value" id="{{ dataset.id }}-data-size">Loading...</span>
+                <span class="meta-value">{{ dataset.stats_size }}</span>
             </div>
             <div class="meta-item">
                 <span class="meta-label">Type</span>
@@ -40,7 +40,7 @@
             </div>
             <div class="meta-item">
                 <span class="meta-label">Rows</span>
-                <span class="meta-value" id="{{ dataset.id }}-rows">Loading...</span>
+                <span class="meta-value">{{ dataset.stats_rows }}</span>
             </div>
             <div class="meta-item">
                 <span class="meta-label">Updates</span>
@@ -50,6 +50,12 @@
                 <span class="meta-label">History</span>
                 <span class="meta-value">{{ dataset.history }}</span>
             </div>
+            {% if dataset.stats_last_updated %}
+            <div class="meta-item">
+                <span class="meta-label">Last updated</span>
+                <span class="meta-value">{{ dataset.stats_last_updated }}</span>
+            </div>
+            {% endif %}
         </div>
 
         <div class="data-section-description">
@@ -83,75 +89,8 @@
 {% block scripts %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 <script src="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.js"></script>
-<script type="application/json" id="page-datasets-data">{{ datasets | tojson }}</script>
 <script>
     hljs.highlightAll();
     hljs.addPlugin(new CopyButtonPlugin());
-    
-    // Function to fetch dataset information from Hugging Face API
-    async function fetchDatasetInfo(datasetName, rowsElementId, sizeElementId, fallbackRows, fallbackSize) {
-        const API_URL = `https://datasets-server.huggingface.co/info?dataset=vtasca/${datasetName}`;
-        
-        try {
-            const response = await fetch(API_URL);
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            
-            const data = await response.json();
-            
-            // Extract the information we need
-            const numExamples = data.dataset_info.default.splits.train.num_examples;
-            const numBytes = data.dataset_info.default.splits.train.num_bytes;
-            const sizeInMB = (numBytes / (1024 * 1024)).toFixed(1);
-            
-            // Update the DOM elements
-            const rowsElement = document.getElementById(rowsElementId);
-            const sizeElement = document.getElementById(sizeElementId);
-            
-            if (rowsElement) {
-                rowsElement.textContent = numExamples.toLocaleString();
-            }
-            
-            if (sizeElement) {
-                sizeElement.textContent = `${sizeInMB} MB`;
-            }
-            
-        } catch (error) {
-            console.error(`Error fetching ${datasetName} dataset info:`, error);
-            
-            // Fallback to default values on error
-            const rowsElement = document.getElementById(rowsElementId);
-            const sizeElement = document.getElementById(sizeElementId);
-            
-            if (rowsElement) {
-                rowsElement.textContent = fallbackRows;
-            }
-            
-            if (sizeElement) {
-                sizeElement.textContent = fallbackSize;
-            }
-        }
-    }
-    
-    // Function to fetch all dataset information
-    async function fetchAllDatasetInfo() {
-        const datasets = JSON.parse(
-            document.getElementById('page-datasets-data').textContent
-        );
-
-        for (const dataset of datasets) {
-            await fetchDatasetInfo(
-                dataset.huggingface_dataset_name,
-                `${dataset.id}-rows`,
-                `${dataset.id}-data-size`,
-                dataset.fallback_rows,
-                dataset.fallback_size
-            );
-        }
-    }
-    
-    // Fetch all dataset info when the page loads
-    document.addEventListener('DOMContentLoaded', fetchAllDatasetInfo);
 </script>
 {% endblock %}
