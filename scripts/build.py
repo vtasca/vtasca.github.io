@@ -8,6 +8,7 @@ import random
 import re
 import xml.etree.ElementTree as ET
 from datetime import datetime as dt
+from dataset_stats import resolve_stats
 
 
 def setup_jinja():
@@ -208,6 +209,10 @@ def generate_data(publish_dir, src_dir):
     # Load dataset metadata
     with open(src_dir / "data_metadata.json", "r") as f:
         datasets = json.load(f)
+
+    # Row counts, sizes and last-updated dates from Hugging Face, with a
+    # committed cache as fallback so offline builds still work
+    resolve_stats(datasets, src_dir / "data_stats_cache.json")
 
     html = template.render(
         title="Data Collection",
