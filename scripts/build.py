@@ -54,10 +54,12 @@ def collect_tags(blog_posts):
     """
     tags = {}
     for post in blog_posts:
-        for name in dict.fromkeys(post.get("tags", [])):
+        seen = set()
+        for name in post.get("tags", []):
             slug = tag_slug(name)
-            if not slug:
+            if not slug or slug in seen:
                 continue
+            seen.add(slug)
             entry = tags.setdefault(slug, {"name": name, "slug": slug, "count": 0})
             entry["count"] += 1
     return sorted(tags.values(), key=lambda t: (-t["count"], t["name"].lower()))
