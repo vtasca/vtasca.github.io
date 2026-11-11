@@ -19,3 +19,11 @@ dependencies = [
 
 [tool.uv.sources]
 notion2md = { git = "https://github.com/vtasca/notion2md-extended.git" }
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
