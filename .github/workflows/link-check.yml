@@ -1,0 +1,39 @@
+name: Link check
+
+# PR-only quality guard: builds the site from committed content (no Notion
+# fetch, no secrets) and checks internal links, anchors, asset paths and SRI.
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  link-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version-file: '.python-version'
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+
+      - name: Install dependencies
+        run: uv sync
+
+      - name: Unit tests for the checkers
+        run: uv run python -m unittest discover -s tests -p 'test_link_check_sri.py' -v
+
+      - name: Check SRI on third-party tags (offline)
+        run: uv run python scripts/sri.py --check
+
+      - name: Build site from committed content
+        run: uv run python scripts/build.py
+
+      - name: Check links in published/
+        run: uv run python scripts/check_links.py published --list-external

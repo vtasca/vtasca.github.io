@@ -67,7 +67,9 @@ def check(templates: Path = TEMPLATES) -> list[str]:
             where = f"{path.relative_to(templates.parent.parent)}:{line}"
             if not is_pinned(url):
                 problems.append(f"{where}: not pinned to an exact version: {url}")
-            if not attrs.get("integrity", "").startswith(("sha256-", "sha384-", "sha512-")):
+            if not attrs.get("integrity", "").startswith(
+                ("sha256-", "sha384-", "sha512-")
+            ):
                 problems.append(f"{where}: missing integrity: {url}")
             if attrs.get("crossorigin") != "anonymous":
                 problems.append(f'{where}: missing crossorigin="anonymous": {url}')
@@ -146,7 +148,11 @@ def main(argv=None) -> int:
     for p in problems:
         print(p)
     if not problems:
-        print("SRI: all third-party tags pinned and hashed" if args.check else "SRI: all hashes match")
+        print(
+            "SRI: all third-party tags pinned and hashed"
+            if args.check
+            else "SRI: all hashes match"
+        )
     return 1 if problems else 0
 
 
