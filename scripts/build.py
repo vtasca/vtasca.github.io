@@ -6,6 +6,7 @@ from jinja2 import Environment, FileSystemLoader
 import datetime
 import random
 import re
+import unicodedata
 import xml.etree.ElementTree as ET
 from datetime import datetime as dt
 
@@ -23,7 +24,43 @@ def setup_jinja():
     # Add is_homepage flag
     env.globals["is_homepage"] = False
 
+    # Tag name -> URL slug, used by templates to link tags to their pages
+    env.filters["tag_slug"] = tag_slug
+
     return env
+
+
+def tag_slug(tag):
+    """Turn a tag name into a URL-safe slug (same rules as fetch.slugify)."""
+    value = (
+        unicodedata.normalize("NFKD", str(tag)).encode("ascii", "ignore").decode("ascii")
+    )
+    value = re.sub(r"[^\w\s-]", "", value.lower())
+    return re.sub(r"[-\s]+", "-", value).strip("-_")
+
+
+def sort_posts(blog_posts):
+    """Sort posts newest first by publication (Notion creation) time.
+
+    The metadata has no 'date' key; ISO-8601 timestamps sort correctly as strings.
+    """
+    return sorted(blog_posts, key=lambda x: x.get("created_time") or "", reverse=True)
+
+
+def collect_tags(blog_posts):
+    """Return [{'name', 'slug', 'count'}] for every tag, most used first, then by name.
+
+    Tags whose names collapse to the same slug are merged under the first name seen.
+    """
+    tags = {}
+    for post in blog_posts:
+        for name in dict.fromkeys(post.get("tags", [])):
+            slug = tag_slug(name)
+            if not slug:
+                continue
+            entry = tags.setdefault(slug, {"name": name, "slug": slug, "count": 0})
+            entry["count"] += 1
+    return sorted(tags.values(), key=lambda t: (-t["count"], t["name"].lower()))
 
 
 def convert_markdown_to_html(
@@ -115,13 +152,13 @@ def generate_blog_index(blog_posts, publish_dir, src_dir):
     env = setup_jinja()
     template = env.get_template("blog-index.html")
 
-    sorted_posts = sorted(blog_posts, key=lambda x: x.get("date", ""), reverse=True)
-
     # Render template
     html = template.render(
         title="Blog",
         description="Controverisal takes, tagged and sorted chronologically",
-        posts=sorted_posts,
+        posts=sort_posts(blog_posts),
+        all_tags=collect_tags(blog_posts),
+        active_tag=None,
         static_prefix="../static",
         root_prefix="..",
     )
@@ -129,6 +166,49 @@ def generate_blog_index(blog_posts, publish_dir, src_dir):
     # Write the generated index page
     with open(publish_dir / "blog/index.html", "w", encoding="utf-8") as f:
         f.write(html)
+
+
+def generate_tag_pages(blog_posts, publish_dir):
+    """Generate blog/tag/<slug>.html for every tag, plus blog/tag/index.html"""
+    env = setup_jinja()
+    template = env.get_template("blog-index.html")
+
+    tag_dir = publish_dir / "blog" / "tag"
+    tag_dir.mkdir(parents=True, exist_ok=True)
+
+    all_tags = collect_tags(blog_posts)
+    sorted_posts = sort_posts(blog_posts)
+
+    for tag in all_tags:
+        posts = [
+            p for p in sorted_posts
+            if tag["slug"] in {tag_slug(t) for t in p.get("tags", [])}
+        ]
+        html = template.render(
+            title=f"Posts tagged {tag['name']}",
+            description=f"Blog posts tagged {tag['name']}",
+            posts=posts,
+            all_tags=all_tags,
+            active_tag=tag,
+            static_prefix="../../static",
+            root_prefix="../..",
+        )
+        with open(tag_dir / f"{tag['slug']}.html", "w", encoding="utf-8") as f:
+            f.write(html)
+
+    # Overview of all tags
+    tags_template = env.get_template("blog-tags.html")
+    html = tags_template.render(
+        title="Tags",
+        description="All blog tags",
+        all_tags=all_tags,
+        static_prefix="../../static",
+        root_prefix="../..",
+    )
+    with open(tag_dir / "index.html", "w", encoding="utf-8") as f:
+        f.write(html)
+
+    return all_tags
 
 
 def generate_home(publish_dir):
@@ -320,6 +400,7 @@ if __name__ == "__main__":
     # Generate other pages
     generate_home(publish_dir)
     generate_blog_index(blog_posts, publish_dir, src_dir)
+    generate_tag_pages(blog_posts, publish_dir)
     generate_rss_feed(blog_posts, publish_dir)
     generate_contact(publish_dir)
     generate_tools(publish_dir)
