@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed for vtasca.dev" href="{{root_prefix}}/blog/rss.xml">
+{% endblock %}
+
+{% block content %}
+<div class="header">
+    <a href="{{root_prefix}}/blog" class="back-to-blog">
+        <i class="fas fa-arrow-left"></i> Back to Blog
+    </a>
+    <h1>Tags</h1>
+</div>
+
+<nav class="tag-filter tag-cloud" aria-label="All tags">
+    {% for tag in all_tags %}
+    <a href="{{root_prefix}}/blog/tag/{{ tag.slug }}" class="tag">{{ tag.name }} <span class="tag-count">{{ tag.count }}</span></a>
+    {% endfor %}
+</nav>
+{% endblock %}

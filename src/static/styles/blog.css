@@ -104,3 +104,67 @@
 .back-to-blog i {
     font-size: 0.8rem;
 }
+
+/* Blog cards: the title link stretches over the whole card, while tag
+   links sit above it so they stay independently clickable. */
+.blog-post-link {
+    position: relative;
+}
+
+.post-title-link {
+    color: inherit;
+    text-decoration: none;
+}
+
+.post-title-link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+}
+
+.blog-post .tags {
+    position: relative;
+    z-index: 1;
+}
+
+a.tag {
+    text-decoration: none;
+    border-bottom: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+a.tag:hover,
+a.tag:focus-visible {
+    background-color: var(--tag-color);
+    color: var(--bg-color);
+    border-bottom: none;
+}
+
+/* Tag filter bar on the blog index and tag pages */
+.tag-filter {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 1rem 0 0 0;
+}
+
+.tag-filter .tag {
+    font-size: 0.85rem;
+    padding: 0.25rem 0.75rem;
+}
+
+.tag-filter .tag-active {
+    background-color: var(--tag-color);
+    color: var(--bg-color);
+}
+
+.tag-count {
+    opacity: 0.6;
+    font-size: 0.75em;
+    margin-left: 0.15rem;
+}
+
+.active-tag-name {
+    font-style: italic;
+}
