@@ -152,7 +152,13 @@ def generate_home(publish_dir):
 
 def generate_rss_feed(blog_posts, publish_dir):
     """Generate the RSS feed XML file"""
+    from email.utils import format_datetime
+
     env = setup_jinja()
+    # RSS 2.0 requires RFC 822 dates; Notion gives ISO 8601 ("...T21:56:00.000Z")
+    env.filters["rfc822"] = lambda iso: format_datetime(
+        dt.fromisoformat(iso.replace("Z", "+00:00"))
+    )
     template = env.get_template("rss.xml")
 
     # Sort posts by last edited time, newest first
@@ -161,7 +167,7 @@ def generate_rss_feed(blog_posts, publish_dir):
     )
 
     # Render template
-    xml = template.render(posts=sorted_posts, now=datetime.datetime.now())
+    xml = template.render(posts=sorted_posts, now=datetime.datetime.now(datetime.timezone.utc))
 
     # Write the RSS feed
     with open(publish_dir / "blog/rss.xml", "w", encoding="utf-8") as f:
